@@ -1,0 +1,309 @@
+'use client';
+
+import Image from 'next/image';
+import { motion, type Variants } from 'framer-motion';
+
+const contactCards = [
+  {
+    icon: 'location_on',
+    label: 'Address',
+    value: '123 Innovation Drive, Creative Quarter, SF 94103',
+    bg: 'bg-[#e8fff4]',
+    iconColor: 'text-[#006a2d]',
+    border: 'border-[#86efac]',
+  },
+  {
+    icon: 'phone',
+    label: 'Phone',
+    value: '+1 (415) 555-0192',
+    bg: 'bg-[#f5e8ff]',
+    iconColor: 'text-[#8126cf]',
+    border: 'border-[#c4b5fd]',
+  },
+  {
+    icon: 'mail',
+    label: 'Email',
+    value: 'hello@mindmasters.edu',
+    bg: 'bg-[#fffbe8]',
+    iconColor: 'text-[#6a5b00]',
+    border: 'border-[#fde68a]',
+  },
+  {
+    icon: 'schedule',
+    label: 'Hours',
+    value: 'Mon – Sat  8:00 AM – 8:00 PM',
+    bg: 'bg-[#e8fff4]',
+    iconColor: 'text-[#006a2d]',
+    border: 'border-[#86efac]',
+  },
+];
+
+const socialLinks = [
+  { icon: 'photo_camera', label: 'Instagram', handle: '@mindmasters',   bg: 'bg-[#f5e8ff]', iconColor: 'text-[#8126cf]' },
+  { icon: 'play_circle',  label: 'YouTube',   handle: 'MindMastersEdu', bg: 'bg-[#fffbe8]', iconColor: 'text-[#6a5b00]' },
+  { icon: 'chat',         label: 'Facebook',  handle: 'Mind Masters',   bg: 'bg-[#e8fff4]', iconColor: 'text-[#006a2d]' },
+];
+
+const fadeLeft: Variants = {
+  hidden:  { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
+const fadeRight: Variants = {
+  hidden:  { opacity: 0, x: 50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
+const stagger: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+};
+const itemUp: Variants = {
+  hidden:  { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+};
+
+export default function ContactSocial() {
+  return (
+    <section id="contact" className="py-24 bg-[#f8f9fa] border-t-4 border-black overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-8">
+
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="mb-14"
+        >
+          <span
+            className="inline-block bg-[#6bff8f] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+            style={{ fontFamily: 'var(--font-space-grotesk)' }}
+          >
+            Visit Us
+          </span>
+          <h2
+            className="text-4xl md:text-6xl font-black uppercase tracking-tighter"
+            style={{ fontFamily: 'var(--font-space-grotesk)' }}
+          >
+            Find Us
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+          {/* ── LEFT: Map + contact cards ── */}
+          <motion.div
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            className="flex flex-col gap-6"
+          >
+            {/* Map */}
+            <div className="border-4 border-black rounded-2xl overflow-hidden h-[300px] md:h-[340px] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative">
+              <Image
+                src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80"
+                alt="Campus location map view"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+
+              {/* Pin badge */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 1.8, ease: 'easeInOut', repeat: Infinity }}
+                  className="flex flex-col items-center"
+                >
+                  <div className="bg-[#fcdf46] border-4 border-black rounded-xl px-4 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-black text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                        location_on
+                      </span>
+                      <span className="font-black text-sm uppercase" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+                        Mind Masters
+                      </span>
+                    </div>
+                  </div>
+                  <div className="w-1 h-4 bg-[#fcdf46] mx-auto" />
+                  <div className="w-3 h-3 bg-[#fcdf46] border-2 border-black rounded-full" />
+                </motion.div>
+              </div>
+
+              {/* Bottom label */}
+              <div className="absolute bottom-4 left-4 right-4">
+                <p
+                  className="text-white font-black text-sm"
+                  style={{ fontFamily: 'var(--font-space-grotesk)' }}
+                >
+                  123 Innovation Drive, Creative Quarter
+                </p>
+              </div>
+            </div>
+
+            {/* Contact info cards — 2×2 grid */}
+            <motion.div
+              className="grid grid-cols-2 gap-3"
+              variants={stagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+            >
+              {contactCards.map((c) => (
+                <motion.div
+                  key={c.label}
+                  variants={itemUp}
+                  whileHover={{ y: -3, transition: { duration: 0.18 } }}
+                  className={`${c.bg} border-2 ${c.border} rounded-2xl p-4 flex gap-3 items-start`}
+                >
+                  <div className={`w-9 h-9 bg-white border-2 ${c.border} rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                    <span
+                      className={`material-symbols-outlined text-lg ${c.iconColor}`}
+                      style={{ fontVariationSettings: "'FILL' 1" }}
+                    >
+                      {c.icon}
+                    </span>
+                  </div>
+                  <div className="min-w-0">
+                    <p
+                      className="font-black text-xs uppercase text-[#5b5b5b] tracking-wide mb-0.5"
+                      style={{ fontFamily: 'var(--font-space-grotesk)' }}
+                    >
+                      {c.label}
+                    </p>
+                    <p
+                      className="font-bold text-sm text-[#1a1a1a] leading-snug"
+                      style={{ fontFamily: 'var(--font-manrope)' }}
+                    >
+                      {c.value}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* ── RIGHT: Quick contact form + socials ── */}
+          <motion.div
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            className="flex flex-col gap-6"
+          >
+            {/* Contact form card */}
+            <div className="bg-white border-4 border-black rounded-2xl p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-5">
+              <div>
+                <h3
+                  className="text-2xl font-black uppercase tracking-tight mb-1"
+                  style={{ fontFamily: 'var(--font-space-grotesk)' }}
+                >
+                  Send a Message
+                </h3>
+                <p
+                  className="text-sm font-bold text-[#5b5b5b]"
+                  style={{ fontFamily: 'var(--font-manrope)' }}
+                >
+                  We&apos;ll get back to you within 24 hours.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1.5">
+                  <label className="font-black text-xs uppercase tracking-wide text-[#1a1a1a]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    className="border-2 border-[#e2e2e2] focus:border-black rounded-xl px-4 py-2.5 font-bold text-sm outline-none transition-colors bg-[#f8f9fa] focus:bg-white"
+                    style={{ fontFamily: 'var(--font-manrope)' }}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="font-black text-xs uppercase tracking-wide text-[#1a1a1a]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="Your number"
+                    className="border-2 border-[#e2e2e2] focus:border-black rounded-xl px-4 py-2.5 font-bold text-sm outline-none transition-colors bg-[#f8f9fa] focus:bg-white"
+                    style={{ fontFamily: 'var(--font-manrope)' }}
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label className="font-black text-xs uppercase tracking-wide text-[#1a1a1a]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+                  Email
+                </label>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  className="border-2 border-[#e2e2e2] focus:border-black rounded-xl px-4 py-2.5 font-bold text-sm outline-none transition-colors bg-[#f8f9fa] focus:bg-white"
+                  style={{ fontFamily: 'var(--font-manrope)' }}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label className="font-black text-xs uppercase tracking-wide text-[#1a1a1a]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+                  Message
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="How can we help?"
+                  className="border-2 border-[#e2e2e2] focus:border-black rounded-xl px-4 py-2.5 font-bold text-sm outline-none transition-colors bg-[#f8f9fa] focus:bg-white resize-none"
+                  style={{ fontFamily: 'var(--font-manrope)' }}
+                />
+              </div>
+
+              <button
+                className="brutalist-button w-full bg-[#8126cf] text-white font-black py-3.5 border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center gap-2 text-base"
+                style={{ fontFamily: 'var(--font-space-grotesk)' }}
+              >
+                Send Message
+                <span className="material-symbols-outlined text-xl">send</span>
+              </button>
+            </div>
+
+            {/* Social links */}
+            <div className="grid grid-cols-3 gap-3">
+              {socialLinks.map((s) => (
+                <motion.button
+                  key={s.label}
+                  whileHover={{ y: -4, transition: { duration: 0.18 } }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`${s.bg} border-2 border-black rounded-2xl p-4 flex flex-col items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] cursor-pointer`}
+                >
+                  <span
+                    className={`material-symbols-outlined text-3xl ${s.iconColor}`}
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    {s.icon}
+                  </span>
+                  <div className="text-center">
+                    <p
+                      className="font-black text-xs text-[#1a1a1a]"
+                      style={{ fontFamily: 'var(--font-space-grotesk)' }}
+                    >
+                      {s.label}
+                    </p>
+                    <p
+                      className="font-bold text-[10px] text-[#5b5b5b]"
+                      style={{ fontFamily: 'var(--font-manrope)' }}
+                    >
+                      {s.handle}
+                    </p>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+
+        </div>
+      </div>
+    </section>
+  );
+}

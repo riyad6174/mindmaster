@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-primary: #006a2d;
+  --color-primary-fixed: #6bff8f;
+  --color-primary-fixed-dim: #5bf083;
+  --color-primary-dim: #005d26;
+  --color-on-primary: #ceffd0;
+  --color-on-primary-fixed: #004a1d;
+  --color-on-primary-fixed-variant: #006a2d;
+  --color-primary-container: #6bff8f;
+  --color-on-primary-container: #005f28;
+
+  --color-secondary: #8126cf;
+  --color-secondary-dim: #740ec2;
+  --color-secondary-fixed: #e5c6ff;
+  --color-secondary-fixed-dim: #dbb4ff;
+  --color-on-secondary: #fbefff;
+  --color-on-secondary-fixed: #4f0089;
+  --color-on-secondary-fixed-variant: #7511c3;
+  --color-secondary-container: #e5c6ff;
+  --color-on-secondary-container: #6900b4;
+
+  --color-tertiary: #6a5b00;
+  --color-tertiary-dim: #5c4f00;
+  --color-tertiary-fixed: #fcdf46;
+  --color-tertiary-fixed-dim: #edd139;
+  --color-on-tertiary: #fff3c5;
+  --color-on-tertiary-fixed: #483d00;
+  --color-on-tertiary-fixed-variant: #685900;
+  --color-tertiary-container: #fcdf46;
+  --color-on-tertiary-container: #5d5000;
+
+  --color-error: #b02500;
+  --color-error-dim: #b92902;
+  --color-on-error: #ffefec;
+  --color-error-container: #f95630;
+  --color-on-error-container: #520c00;
+
+  --color-surface: #f6f6f6;
+  --color-surface-dim: #d4d4d4;
+  --color-surface-bright: #f6f6f6;
+  --color-surface-variant: #dddddd;
+  --color-surface-tint: #006a2d;
+  --color-on-surface: #2f2f2f;
+  --color-on-surface-variant: #5b5b5b;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f1f1f1;
+  --color-surface-container: #e8e8e8;
+  --color-surface-container-high: #e2e2e2;
+  --color-surface-container-highest: #dddddd;
+
+  --color-background: #f6f6f6;
+  --color-on-background: #2f2f2f;
+
+  --color-outline: #777777;
+  --color-outline-variant: #adadad;
+  --color-inverse-surface: #0e0e0e;
+  --color-inverse-on-surface: #9d9d9d;
+  --color-inverse-primary: #6bff8f;
+
+  /* Typography */
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Space Grotesk", sans-serif;
+
+  /* Border Radius */
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  vertical-align: middle;
+}
+
+/* Brutalist button press effect */
+.brutalist-button {
+  transition: all 0.1s ease;
+  cursor: pointer;
+}
+
+.brutalist-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1) !important;
+}
+
+/* Marquee ticker animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Hero sticker float animations */
+@keyframes hero-float-1 {
+  0%, 100% { transform: translateY(0px) rotate(-12deg); }
+  50%       { transform: translateY(-14px) rotate(-12deg); }
+}
+@keyframes hero-float-2 {
+  0%, 100% { transform: translateY(0px) rotate(12deg); }
+  50%       { transform: translateY(-10px) rotate(12deg); }
+}
+.hero-sticker-1 { animation: hero-float-1 3.2s ease-in-out infinite; }
+.hero-sticker-2 { animation: hero-float-2 3.8s ease-in-out infinite 0.6s; }
+
+/* "Mind Masters" glow pulse */
+@keyframes brand-glow {
+  0%, 100% { text-shadow: 0 0 0px rgba(252,223,70,0), 0 0 0px rgba(252,223,70,0); }
+  50%       { text-shadow: 0 0 24px rgba(252,223,70,0.7), 0 0 60px rgba(252,223,70,0.3); }
+}
+.text-brand-glow { animation: brand-glow 2.8s ease-in-out infinite; }
+
+/* Badge shake on color change */
+@keyframes badge-shake {
+  0%   { transform: scale(1) rotate(0deg); }
+  20%  { transform: scale(1.1) rotate(-5deg); }
+  40%  { transform: scale(1.1) rotate(5deg); }
+  60%  { transform: scale(1.06) rotate(-3deg); }
+  80%  { transform: scale(1.04) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.badge-shake {
+  animation: badge-shake 0.45s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #f6f6f6;
+  color: #2f2f2f;
+  font-family: "Manrope", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #fcdf46;
+}
