@@ -26,12 +26,12 @@ export async function verifyAdminToken(token: string) {
   }
 }
 
-export function setAuthCookie(response: NextResponse, token: string) {
+export function setAuthCookie(response: NextResponse, token: string, maxAge?: number) {
   response.cookies.set(COOKIE_NAME, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
-    maxAge: MAX_AGE,
+    maxAge: maxAge ?? MAX_AGE,
     path: '/',
   });
   return response;

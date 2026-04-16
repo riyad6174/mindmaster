@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -20,7 +22,7 @@ export default function AdminLoginPage() {
       const res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, rememberMe }),
       });
 
       if (res.ok) {
@@ -69,7 +71,7 @@ export default function AdminLoginPage() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="admin@mindmasters.com"
+              placeholder="your@email.com"
               className="border border-slate-200 rounded-xl px-4 py-3 font-bold text-sm outline-none transition-all focus:border-[#1a84d2] focus:ring-4 focus:ring-[#1a84d2]/5"
               required
             />
@@ -89,6 +91,21 @@ export default function AdminLoginPage() {
             />
           </div>
 
+          <div className="flex items-center justify-between">
+            <label className="flex items-center gap-2 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="w-4 h-4 rounded border-slate-300 text-[#1a84d2] focus:ring-[#1a84d2]/20"
+              />
+              <span className="text-xs font-bold text-slate-500 group-hover:text-slate-700 transition-colors">Remember Me</span>
+            </label>
+            <button type="button" className="text-[10px] font-black uppercase tracking-widest text-[#1a84d2] hover:underline">
+              Forgot Password?
+            </button>
+          </div>
+
           <button
             type="submit"
             disabled={loading}
@@ -106,9 +123,18 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <p className="text-center mt-10 text-[10px] font-black uppercase tracking-widest text-slate-400">
-          &copy; 2025 Mind Masters Edu Center
-        </p>
+        <div className="mt-10 pt-6 border-t border-slate-100 flex flex-col items-center gap-4">
+          <Link 
+            href="/" 
+            className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#1a84d2] hover:text-[#156cb1] transition-colors"
+          >
+            <span className="material-symbols-outlined text-base">arrow_back</span>
+            Visit Main Website
+          </Link>
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+            &copy; 2025 Mind Masters Edu Center
+          </p>
+        </div>
       </motion.div>
     </main>
   );
