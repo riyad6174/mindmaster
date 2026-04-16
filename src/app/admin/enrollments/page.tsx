@@ -71,7 +71,7 @@ export default function AdminEnrollmentsPage() {
       ],
       theme: 'grid',
       styles: { fontSize: 10, cellPadding: 5 },
-      columnStyles: { 0: { fontStyle: 'bold', width: 50, fillColor: [232, 244, 255] } },
+      columnStyles: { 0: { fontStyle: 'bold', cellWidth: 50, fillColor: [232, 244, 255] } },
     });
 
     doc.save(`Enrollment_${e.name.replace(/\s+/g, '_')}.pdf`);

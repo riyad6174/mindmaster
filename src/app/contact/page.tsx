@@ -52,7 +52,7 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -98,8 +98,9 @@ export default function ContactPage() {
               className='text-lg font-bold text-[#5b5b5b] mt-3 max-w-xl'
               style={{ fontFamily: 'var(--font-manrope)' }}
             >
-              Have a question or ready to enroll? We'd love to hear from you.
-              Fill in the form and we'll get back to you within 24 hours.
+              Have a question or ready to enroll? We&apos;d love to hear from
+              you. Fill in the form and we&apos;ll get back to you within 24
+              hours.
             </p>
           </motion.div>
         </div>
@@ -150,12 +151,19 @@ export default function ContactPage() {
                     className='font-bold text-sm text-[#1a84d2]'
                     style={{ fontFamily: 'var(--font-manrope)' }}
                   >
-                    Thank you for reaching out. We'll get back to you shortly.
+                    Thank you for reaching out. We&apos;ll get back to you
+                    shortly.
                   </p>
                   <button
                     onClick={() => {
                       setSent(false);
-                      setForm({ name: '', email: '', phone: '', message: '' });
+                      setForm({
+                        name: '',
+                        email: '',
+                        phone: '',
+                        subject: 'General Inquiry',
+                        message: '',
+                      });
                     }}
                     className='brutalist-button bg-[#1a84d2] text-white font-black text-sm px-6 py-2.5 border-2 border-black rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
                     style={{ fontFamily: 'var(--font-space-grotesk)' }}

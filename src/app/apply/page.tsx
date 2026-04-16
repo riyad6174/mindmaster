@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 
@@ -120,7 +120,7 @@ const Field = ({
 const inputCls =
   'border-2 border-[#e2e2e2] focus:border-black rounded-xl px-4 py-3 font-bold text-sm outline-none transition-colors bg-[#f8f9fa] focus:bg-white';
 
-export default function ApplyPage() {
+function ApplyForm() {
   const searchParams = useSearchParams();
   const [form, setForm] = useState<FormData>(emptyForm);
   const [sent, setSent] = useState(false);
@@ -368,17 +368,17 @@ export default function ApplyPage() {
                     </div>
 
                     <div className='flex flex-col gap-3 mt-2'>
-                      <p className='font-black text-xs uppercase tracking-wide text-[#1a1a1a]' style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+                        <p className='font-black text-xs uppercase tracking-wide text-[#1a1a1a]' style={{ fontFamily: 'var(--font-space-grotesk)' }}>
                         Preferred Learning Format
-                      </p>
-                      <div className='flex flex-wrap gap-5'>
+                        </p>
+                        <div className='flex flex-wrap gap-5'>
                         {learningFormatOptions.map((opt) => (
-                          <label key={opt} className='flex items-center gap-2 cursor-pointer'>
+                            <label key={opt} className='flex items-center gap-2 cursor-pointer'>
                             <input type='radio' name='learningFormat' value={opt} checked={form.learningFormat === opt} onChange={(e) => set('learningFormat', e.target.value)} className='w-4 h-4 cursor-pointer accent-[#1a84d2]' />
                             <span className='font-bold text-sm text-[#1a1a1a]' style={{ fontFamily: 'var(--font-manrope)' }}>{opt}</span>
-                          </label>
+                            </label>
                         ))}
-                      </div>
+                        </div>
                     </div>
                   </div>
 
@@ -570,5 +570,13 @@ export default function ApplyPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+export default function ApplyPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-slate-50"><span className="animate-spin h-8 w-8 border-4 border-[#1a84d2] border-t-transparent rounded-full" /></div>}>
+      <ApplyForm />
+    </Suspense>
   );
 }

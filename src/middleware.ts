@@ -1,5 +1,4 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/request';
+import { NextResponse, NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
 
 const COOKIE_NAME = 'mm_admin_token';
