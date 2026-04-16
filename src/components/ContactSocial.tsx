@@ -7,9 +7,9 @@ const contactCards = [
     icon: 'location_on',
     label: 'Address',
     value: '131 Woodward Ave, Regina, SK, Canada, S4R3H5',
-    bg: 'bg-[#e8fff4]',
-    iconColor: 'text-[#006a2d]',
-    border: 'border-[#86efac]',
+    bg: 'bg-[#e8f4ff]',
+    iconColor: 'text-[#1a84d2]',
+    border: 'border-[#86c8ef]',
   },
   {
     icon: 'phone',
@@ -31,9 +31,9 @@ const contactCards = [
     icon: 'schedule',
     label: 'Hours',
     value: 'Mon – Sat  8:00 AM – 8:00 PM',
-    bg: 'bg-[#e8fff4]',
-    iconColor: 'text-[#006a2d]',
-    border: 'border-[#86efac]',
+    bg: 'bg-[#e8f4ff]',
+    iconColor: 'text-[#1a84d2]',
+    border: 'border-[#86c8ef]',
   },
 ];
 
@@ -56,8 +56,8 @@ const socialLinks = [
     icon: 'chat',
     label: 'Facebook',
     handle: 'Mind Masters',
-    bg: 'bg-[#e8fff4]',
-    iconColor: 'text-[#006a2d]',
+    bg: 'bg-[#e8f4ff]',
+    iconColor: 'text-[#1a84d2]',
   },
 ];
 
@@ -94,7 +94,7 @@ export default function ContactSocial() {
           className='mb-14'
         >
           <span
-            className='inline-block bg-[#6bff8f] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
+            className='inline-block bg-[#6bb1ff] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
             style={{ fontFamily: 'var(--font-space-grotesk)' }}
           >
             Visit Us

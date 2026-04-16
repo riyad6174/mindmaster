@@ -45,8 +45,8 @@ const floatingStats = [
     icon: 'groups',
     value: '500+',
     label: 'Students',
-    bg: '#6bff8f',
-    text: '#004a1d',
+    bg: '#6bb1ff',
+    text: '#003459',
   },
   {
     icon: 'workspace_premium',

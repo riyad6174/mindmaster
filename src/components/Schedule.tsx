@@ -44,12 +44,12 @@ const P: Omit<ClassEntry, 'label' | 'icon'> = {
 };
 const G: Omit<ClassEntry, 'label' | 'icon'> = {
   category: 'Science',
-  bg: 'bg-[#e8fff4]',
-  iconColor: 'text-[#006a2d]',
+  bg: 'bg-[#e8f4ff]',
+  iconColor: 'text-[#1a84d2]',
   textColor: 'text-[#1a1a1a]',
-  borderColor: 'border-[#006a2d]',
+  borderColor: 'border-[#1a84d2]',
   shadowColor: 'rgba(0,106,45,0.35)',
-  tagBg: 'bg-[#006a2d]',
+  tagBg: 'bg-[#1a84d2]',
   tagText: 'text-white',
 };
 const A: Omit<ClassEntry, 'label' | 'icon'> = {
@@ -80,7 +80,7 @@ const schedule: ScheduleRow[] = [
     type: 'break',
     label: 'Short Break — 10:30 to 11:00',
     icon: 'free_breakfast',
-    accent: '#6bff8f',
+    accent: '#6bb1ff',
   },
   {
     type: 'class',
@@ -116,10 +116,10 @@ const schedule: ScheduleRow[] = [
 
 // Always-visible bold day header colors
 const dayHeaderColors: Record<string, { bg: string; text: string; activeShadow: string }> = {
-  Monday:    { bg: '#6bff8f', text: '#004a1d', activeShadow: '0 0 0 4px #004a1d inset' },
+  Monday:    { bg: '#6bb1ff', text: '#003459', activeShadow: '0 0 0 4px #003459 inset' },
   Tuesday:   { bg: '#e5c6ff', text: '#4f0089', activeShadow: '0 0 0 4px #4f0089 inset' },
   Wednesday: { bg: '#fcdf46', text: '#483d00', activeShadow: '0 0 0 4px #483d00 inset' },
-  Thursday:  { bg: '#6bff8f', text: '#004a1d', activeShadow: '0 0 0 4px #004a1d inset' },
+  Thursday:  { bg: '#6bb1ff', text: '#003459', activeShadow: '0 0 0 4px #003459 inset' },
   Friday:    { bg: '#e5c6ff', text: '#4f0089', activeShadow: '0 0 0 4px #4f0089 inset' },
 };
 
@@ -152,7 +152,7 @@ export default function Schedule() {
         >
           <div>
             <span
-              className="inline-block bg-[#6bff8f] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+              className="inline-block bg-[#6bb1ff] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
               Weekly Timetable
@@ -175,7 +175,7 @@ export default function Schedule() {
           <div className="flex flex-wrap gap-3 items-center">
             {[
               { bg: '#f5e8ff', border: '#c4b5fd', dot: '#8126cf', label: 'Tech & Digital' },
-              { bg: '#e8fff4', border: '#86efac', dot: '#006a2d', label: 'Science & Academic' },
+              { bg: '#e8f4ff', border: '#86c8ef', dot: '#1a84d2', label: 'Science & Academic' },
               { bg: '#fffbe8', border: '#fde68a', dot: '#6a5b00', label: 'Creative Arts' },
             ].map((l) => (
               <div
@@ -206,7 +206,7 @@ export default function Schedule() {
             {/* Corner cell */}
             <div className="bg-black flex items-center justify-center border-r-4 border-black p-3">
               <span
-                className="material-symbols-outlined text-[#6bff8f] text-2xl"
+                className="material-symbols-outlined text-[#6bb1ff] text-2xl"
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
                 calendar_month
@@ -292,14 +292,14 @@ export default function Schedule() {
                   {/* Time cell */}
                   <div className="bg-black border-r-4 border-black flex flex-col items-center justify-center gap-0.5 py-4 px-2">
                     <span
-                      className="font-black text-sm text-[#6bff8f] leading-none"
+                      className="font-black text-sm text-[#6bb1ff] leading-none"
                       style={{ fontFamily: 'var(--font-space-grotesk)' }}
                     >
                       {row.timeStart}
                     </span>
                     <span className="text-white/30 text-xs font-bold">—</span>
                     <span
-                      className="font-black text-sm text-[#6bff8f] leading-none"
+                      className="font-black text-sm text-[#6bb1ff] leading-none"
                       style={{ fontFamily: 'var(--font-space-grotesk)' }}
                     >
                       {row.timeEnd}

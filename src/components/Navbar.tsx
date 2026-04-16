@@ -7,10 +7,11 @@ import { usePathname } from 'next/navigation';
 import logo from '../assets/logo.png';
 
 const navLinks = [
-  { label: 'Home',     href: '/' },
-  { label: 'Programs', href: '/programs' },
-  { label: 'About',    href: '/about' },
-  { label: 'Contact',  href: '/contact' },
+  { label: 'Home',              href: '/' },
+  { label: 'Programs',          href: '/programs' },
+  { label: 'Academic Calendar', href: '/academic-calendar' },
+  { label: 'About',             href: '/about' },
+  { label: 'Contact',           href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -43,7 +44,7 @@ export default function Navbar() {
               href={link.href}
               className={`font-black tracking-tight py-1 transition-all hover:translate-x-[2px] hover:translate-y-[2px] relative ${
                 active
-                  ? 'text-[#006a2d]'
+                  ? 'text-[#1a84d2]'
                   : 'text-black hover:text-[#8126cf]'
               }`}
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
@@ -51,7 +52,7 @@ export default function Navbar() {
               {link.label}
               {/* Active underline */}
               {active && (
-                <span className='absolute -bottom-1 left-0 right-0 h-[3px] bg-[#006a2d] rounded-full' />
+                <span className='absolute -bottom-1 left-0 right-0 h-[3px] bg-[#1a84d2] rounded-full' />
               )}
             </Link>
           );
@@ -64,8 +65,8 @@ export default function Navbar() {
           href='/apply'
           className={`brutalist-button font-black px-5 py-2 border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hidden md:inline-flex items-center transition-all ${
             isActive('/apply')
-              ? 'bg-black text-[#6bff8f]'
-              : 'bg-[#6bff8f] text-black'
+              ? 'bg-black text-[#6bb1ff]'
+              : 'bg-[#6bb1ff] text-black'
           }`}
           style={{ fontFamily: 'var(--font-space-grotesk)' }}
         >
@@ -102,7 +103,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className={`px-8 py-4 font-black border-b-2 border-black/10 transition-colors flex items-center justify-between ${
                   active
-                    ? 'bg-[#6bff8f] text-[#004a1d]'
+                    ? 'bg-[#6bb1ff] text-[#003459]'
                     : 'text-black hover:bg-[#f1f1f1]'
                 }`}
                 style={{ fontFamily: 'var(--font-space-grotesk)' }}
@@ -110,7 +111,7 @@ export default function Navbar() {
                 {link.label}
                 {active && (
                   <span
-                    className='material-symbols-outlined text-base text-[#006a2d]'
+                    className='material-symbols-outlined text-base text-[#1a84d2]'
                     style={{ fontVariationSettings: "'FILL' 1" }}
                   >
                     arrow_forward
@@ -124,7 +125,7 @@ export default function Navbar() {
               href='/apply'
               onClick={() => setMenuOpen(false)}
               className={`brutalist-button inline-block font-black px-6 py-3 border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
-                isActive('/apply') ? 'bg-black text-[#6bff8f]' : 'bg-[#6bff8f] text-black'
+                isActive('/apply') ? 'bg-black text-[#6bb1ff]' : 'bg-[#6bb1ff] text-black'
               }`}
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >

@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 
-type Program = 'preschool' | 'krazy-math';
+type Program = 'after-school' | 'university-support' | 'krazy-math' | 'preschool';
 
 const programOptions: {
   id: Program;
@@ -15,22 +16,40 @@ const programOptions: {
   border: string;
 }[] = [
   {
-    id: 'preschool',
-    label: 'Preschool & After School',
-    icon: 'child_care',
-    desc: 'Ages 3–5 · Mon–Fri · 9:00 AM – 12:00 PM · Darul Falah Islamic Centre',
-    color: '#8126cf',
-    bg: '#f5e8ff',
-    border: 'border-[#c4b5fd]',
+    id: 'after-school',
+    label: 'After School Program',
+    icon: 'local_library',
+    desc: 'Grades 4–12 · Sunshine, Freshman/Sophomore & Junior/Senior Math & Science',
+    color: '#1a84d2',
+    bg: '#e8f4ff',
+    border: 'border-[#86c8ef]',
+  },
+  {
+    id: 'university-support',
+    label: 'University Support',
+    icon: 'account_balance',
+    desc: 'University Tutoring · Top 10 Admission Prep · IELTS · On-Demand Tutoring',
+    color: '#6a5b00',
+    bg: '#fffbe8',
+    border: 'border-[#fde68a]',
   },
   {
     id: 'krazy-math',
     label: 'Krazy Math Tutorial',
     icon: 'calculate',
     desc: 'Grades 2–12 · Mon, Tue, Thu · 6:30 – 8:30 PM · 1876 Wallace St, Regina SK',
-    color: '#006a2d',
-    bg: '#e8fff4',
-    border: 'border-[#86efac]',
+    color: '#8126cf',
+    bg: '#f5e8ff',
+    border: 'border-[#c4b5fd]',
+  },
+  {
+    id: 'preschool',
+    label: 'Preschool Program',
+    icon: 'child_care',
+    desc: 'Ages 3–5 · Mon–Fri · 9:00 AM – 12:00 PM · Darul Falah Islamic Centre',
+    color: '#1a84d2',
+    bg: '#e8f4ff',
+    border: 'border-[#86c8ef]',
   },
 ];
 
@@ -44,7 +63,25 @@ type FormData = {
   address: string;
   enrollDate: string;
   program: Program | '';
+  supportArea: string;
+  learningFormat: string;
 };
+
+const supportAreaOptions = [
+  'Mathematics',
+  'Science',
+  'ESL',
+  'IELTS Preparation',
+  'University Admission Preparation',
+  'Homework Support',
+  'Other'
+];
+
+const learningFormatOptions = [
+  'In-person',
+  'Virtual (Zoom)',
+  'Either'
+];
 
 const emptyForm: FormData = {
   name: '',
@@ -56,6 +93,8 @@ const emptyForm: FormData = {
   address: '',
   enrollDate: '',
   program: '',
+  supportArea: '',
+  learningFormat: '',
 };
 
 const Field = ({
@@ -82,20 +121,43 @@ const inputCls =
   'border-2 border-[#e2e2e2] focus:border-black rounded-xl px-4 py-3 font-bold text-sm outline-none transition-colors bg-[#f8f9fa] focus:bg-white';
 
 export default function ApplyPage() {
+  const searchParams = useSearchParams();
   const [form, setForm] = useState<FormData>(emptyForm);
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Pre-select program from URL param e.g. /apply?program=krazy-math
+  useEffect(() => {
+    const param = searchParams.get('program') as Program | null;
+    if (param && programOptions.some((p) => p.id === param)) {
+      setForm((f) => ({ ...f, program: param }));
+    }
+  }, [searchParams]);
+
   const set = (k: keyof FormData, v: string) =>
     setForm((f) => ({ ...f, [k]: v }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    
+    try {
+      const res = await fetch('/api/enrollment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      if (res.ok) {
+        setSent(true);
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      alert('An error occurred. Please check your connection.');
+    } finally {
       setLoading(false);
-      setSent(true);
-    }, 1400);
+    }
   };
 
   return (
@@ -109,10 +171,10 @@ export default function ApplyPage() {
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <span
-              className='inline-block bg-[#6bff8f] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
+              className='inline-block bg-[#6bb1ff] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
               style={{
                 fontFamily: 'var(--font-space-grotesk)',
-                color: '#004a1d',
+                color: '#003459',
               }}
             >
               Enrollment
@@ -147,22 +209,22 @@ export default function ApplyPage() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className='bg-[#e8fff4] border-4 border-[#006a2d] rounded-2xl p-10 flex flex-col items-center gap-4 text-center'
+                  className='bg-[#e8f4ff] border-4 border-[#1a84d2] rounded-2xl p-10 flex flex-col items-center gap-4 text-center'
                 >
                   <span
-                    className='material-symbols-outlined text-6xl text-[#006a2d]'
+                    className='material-symbols-outlined text-6xl text-[#1a84d2]'
                     style={{ fontVariationSettings: "'FILL' 1" }}
                   >
                     check_circle
                   </span>
                   <h2
-                    className='text-2xl font-black text-[#006a2d] uppercase tracking-tight'
+                    className='text-2xl font-black text-[#1a84d2] uppercase tracking-tight'
                     style={{ fontFamily: 'var(--font-space-grotesk)' }}
                   >
                     Application Submitted!
                   </h2>
                   <p
-                    className='font-bold text-sm text-[#006a2d] max-w-sm'
+                    className='font-bold text-sm text-[#1a84d2] max-w-sm'
                     style={{ fontFamily: 'var(--font-manrope)' }}
                   >
                     Thank you for applying to Mind Masters Edu Center. Our team
@@ -174,7 +236,7 @@ export default function ApplyPage() {
                       setSent(false);
                       setForm(emptyForm);
                     }}
-                    className='brutalist-button bg-[#006a2d] text-white font-black text-sm px-6 py-3 border-2 border-black rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] mt-2'
+                    className='brutalist-button bg-[#1a84d2] text-white font-black text-sm px-6 py-3 border-2 border-black rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] mt-2'
                     style={{ fontFamily: 'var(--font-space-grotesk)' }}
                   >
                     Submit Another Application
@@ -184,12 +246,20 @@ export default function ApplyPage() {
                 <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
                   {/* Program selection */}
                   <div className='flex flex-col gap-3'>
-                    <p
-                      className='font-black text-xs uppercase tracking-wide text-[#1a1a1a]'
-                      style={{ fontFamily: 'var(--font-space-grotesk)' }}
-                    >
-                      Select Program <span className='text-[#8126cf]'>*</span>
-                    </p>
+                    <div className='flex items-center gap-3'>
+                      <p
+                        className='font-black text-xs uppercase tracking-wide text-[#1a1a1a]'
+                        style={{ fontFamily: 'var(--font-space-grotesk)' }}
+                      >
+                        Select Program <span className='text-[#8126cf]'>*</span>
+                      </p>
+                      {form.program && (
+                        <span className='inline-flex items-center gap-1 bg-[#e8f4ff] border-2 border-[#1a84d2] text-[#1a84d2] font-black text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-lg'>
+                          <span className='material-symbols-outlined text-xs' style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                          Selected
+                        </span>
+                      )}
+                    </div>
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                       {programOptions.map((opt) => {
                         const selected = form.program === opt.id;
@@ -260,6 +330,55 @@ export default function ApplyPage() {
                           </button>
                         );
                       })}
+                    </div>
+                  </div>
+
+                  {/* Divider */}
+                  <div className='border-t-2 border-[#e2e2e2]' />
+
+                  {/* Support Preferences */}
+                  <div className='flex flex-col gap-5'>
+                    <p
+                      className='font-black text-sm uppercase tracking-wide text-[#1a1a1a] flex items-center gap-2'
+                      style={{ fontFamily: 'var(--font-space-grotesk)' }}
+                    >
+                      <span className='w-6 h-6 bg-black rounded-lg flex items-center justify-center'>
+                        <span
+                          className='material-symbols-outlined text-sm text-white'
+                          style={{ fontVariationSettings: "'FILL' 1" }}
+                        >
+                          school
+                        </span>
+                      </span>
+                      Support Preferences
+                    </p>
+
+                    <div className='flex flex-col gap-3'>
+                      <p className='font-black text-xs uppercase tracking-wide text-[#1a1a1a]' style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+                        Primary Area of Support Requested
+                      </p>
+                      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3'>
+                        {supportAreaOptions.map((opt) => (
+                          <label key={opt} className='flex items-center gap-2 cursor-pointer'>
+                            <input type='radio' name='supportArea' value={opt} checked={form.supportArea === opt} onChange={(e) => set('supportArea', e.target.value)} className='w-4 h-4 cursor-pointer accent-[#1a84d2]' />
+                            <span className='font-bold text-sm text-[#1a1a1a]' style={{ fontFamily: 'var(--font-manrope)' }}>{opt}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className='flex flex-col gap-3 mt-2'>
+                      <p className='font-black text-xs uppercase tracking-wide text-[#1a1a1a]' style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+                        Preferred Learning Format
+                      </p>
+                      <div className='flex flex-wrap gap-5'>
+                        {learningFormatOptions.map((opt) => (
+                          <label key={opt} className='flex items-center gap-2 cursor-pointer'>
+                            <input type='radio' name='learningFormat' value={opt} checked={form.learningFormat === opt} onChange={(e) => set('learningFormat', e.target.value)} className='w-4 h-4 cursor-pointer accent-[#1a84d2]' />
+                            <span className='font-bold text-sm text-[#1a1a1a]' style={{ fontFamily: 'var(--font-manrope)' }}>{opt}</span>
+                          </label>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
@@ -427,7 +546,7 @@ export default function ApplyPage() {
                   <button
                     type='submit'
                     disabled={loading || !form.program}
-                    className='brutalist-button bg-black text-white font-black py-4 border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(107,255,143,1)] flex items-center justify-center gap-2 text-base disabled:opacity-50'
+                    className='brutalist-button bg-black text-white font-black py-4 border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(107,177,255,1)] flex items-center justify-center gap-2 text-base disabled:opacity-50'
                     style={{ fontFamily: 'var(--font-space-grotesk)' }}
                   >
                     {loading ? (

@@ -3,10 +3,10 @@
 import { motion, type Variants } from 'framer-motion';
 
 const actions = [
-  { icon: 'auto_stories',           label: 'Library Access', bg: 'bg-[#6bff8f]', iconColor: 'text-black', iconSize: 'text-6xl md:text-7xl' },
+  { icon: 'auto_stories',           label: 'Library Access', bg: 'bg-[#6bb1ff]', iconColor: 'text-black', iconSize: 'text-6xl md:text-7xl' },
   { icon: 'account_balance_wallet', label: 'Fee Payment',    bg: 'bg-[#e5c6ff]', iconColor: 'text-black', iconSize: 'text-5xl md:text-6xl' },
   { icon: 'schedule',               label: 'My Timetable',   bg: 'bg-[#fcdf46]', iconColor: 'text-black', iconSize: 'text-5xl md:text-6xl' },
-  { icon: 'support_agent',          label: 'Get Support',    bg: 'bg-[#6bff8f]', iconColor: 'text-black', iconSize: 'text-5xl md:text-6xl' },
+  { icon: 'support_agent',          label: 'Get Support',    bg: 'bg-[#6bb1ff]', iconColor: 'text-black', iconSize: 'text-5xl md:text-6xl' },
   { icon: 'leaderboard',            label: 'Results',        bg: 'bg-[#e5c6ff]', iconColor: 'text-black', iconSize: 'text-5xl md:text-6xl' },
   { icon: 'event_note',             label: 'Events',         bg: 'bg-[#fcdf46]', iconColor: 'text-black', iconSize: 'text-5xl md:text-6xl' },
 ];

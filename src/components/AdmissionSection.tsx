@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const badgeColors = [
-  { panelBg: '#e8fff4', badgeBg: '#6bff8f', badgeText: '#004a1d', accent: '#006a2d' },
+  { panelBg: '#e8f4ff', badgeBg: '#6bb1ff', badgeText: '#003459', accent: '#1a84d2' },
   { panelBg: '#f0e8ff', badgeBg: '#e5c6ff', badgeText: '#4f0089', accent: '#8126cf' },
   { panelBg: '#fffde8', badgeBg: '#fcdf46', badgeText: '#483d00', accent: '#6a5b00' },
 ];

@@ -6,16 +6,16 @@ import { motion, useAnimationFrame, useMotionValue } from 'framer-motion';
 
 const row1 = [
   { src: 'https://images.pexels.com/photos/8421946/pexels-photo-8421946.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Innovation Lab',   tag: 'Tech',     tagBg: '#f5e8ff', tagColor: '#8126cf' },
-  { src: 'https://images.pexels.com/photos/5427868/pexels-photo-5427868.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Study Sessions',  tag: 'Academic', tagBg: '#e8fff4', tagColor: '#006a2d' },
-  { src: 'https://images.pexels.com/photos/6964688/pexels-photo-6964688.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Math Olympiad',   tag: 'Academic', tagBg: '#e8fff4', tagColor: '#006a2d' },
+  { src: 'https://images.pexels.com/photos/5427868/pexels-photo-5427868.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Study Sessions',  tag: 'Academic', tagBg: '#e8f4ff', tagColor: '#1a84d2' },
+  { src: 'https://images.pexels.com/photos/6964688/pexels-photo-6964688.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Math Olympiad',   tag: 'Academic', tagBg: '#e8f4ff', tagColor: '#1a84d2' },
   { src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&q=80',                            label: 'Young Explorers', tag: 'Kids',     tagBg: '#fffbe8', tagColor: '#6a5b00' },
-  { src: 'https://images.pexels.com/photos/7176476/pexels-photo-7176476.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Science Lab',     tag: 'Science',  tagBg: '#e8fff4', tagColor: '#006a2d' },
+  { src: 'https://images.pexels.com/photos/7176476/pexels-photo-7176476.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Science Lab',     tag: 'Science',  tagBg: '#e8f4ff', tagColor: '#1a84d2' },
   { src: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500&q=80',                               label: 'Middle School',   tag: 'Growth',   tagBg: '#f5e8ff', tagColor: '#8126cf' },
 ];
 
 const row2 = [
   { src: 'https://images.pexels.com/photos/4711732/pexels-photo-4711732.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Music & Arts',    tag: 'Creative', tagBg: '#fffbe8', tagColor: '#6a5b00' },
-  { src: 'https://images.pexels.com/photos/6624376/pexels-photo-6624376.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Mental Abacus',   tag: 'Math',     tagBg: '#e8fff4', tagColor: '#006a2d' },
+  { src: 'https://images.pexels.com/photos/6624376/pexels-photo-6624376.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Mental Abacus',   tag: 'Math',     tagBg: '#e8f4ff', tagColor: '#1a84d2' },
   { src: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=500&q=80',                            label: 'Academy Leaders', tag: 'Leaders',  tagBg: '#f5e8ff', tagColor: '#8126cf' },
   { src: 'https://images.pexels.com/photos/5561460/pexels-photo-5561460.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Campus Life',     tag: 'Life',     tagBg: '#fffbe8', tagColor: '#6a5b00' },
   { src: 'https://images.pexels.com/photos/8421946/pexels-photo-8421946.jpeg?auto=compress&cs=tinysrgb&w=500', label: 'Robotics Club',   tag: 'Tech',     tagBg: '#f5e8ff', tagColor: '#8126cf' },
@@ -108,7 +108,7 @@ export default function GallerySection() {
       >
         <div>
           <span
-            className="inline-block bg-[#6bff8f] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+            className="inline-block bg-[#6bb1ff] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
             style={{ fontFamily: 'var(--font-space-grotesk)' }}
           >
             Our Campus

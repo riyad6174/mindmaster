@@ -5,10 +5,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const stats = [
-  { value: '500+', label: 'Students Enrolled', icon: 'people', color: '#006a2d', bg: '#e8fff4', border: 'border-[#86efac]' },
+  { value: '500+', label: 'Students Enrolled', icon: 'people', color: '#1a84d2', bg: '#e8f4ff', border: 'border-[#86c8ef]' },
   { value: '10+', label: 'Years of Excellence', icon: 'verified', color: '#8126cf', bg: '#f5e8ff', border: 'border-[#c4b5fd]' },
   { value: '20+', label: 'Expert Educators', icon: 'school', color: '#6a5b00', bg: '#fffbe8', border: 'border-[#fde68a]' },
-  { value: '95%', label: 'Student Success Rate', icon: 'emoji_events', color: '#006a2d', bg: '#e8fff4', border: 'border-[#86efac]' },
+  { value: '95%', label: 'Student Success Rate', icon: 'emoji_events', color: '#1a84d2', bg: '#e8f4ff', border: 'border-[#86c8ef]' },
 ];
 
 const teamMembers = [
@@ -16,11 +16,11 @@ const teamMembers = [
     name: 'Aisha Rahman',
     role: 'Head of Curriculum',
     icon: 'menu_book',
-    bg: '#e8fff4',
-    iconColor: '#006a2d',
-    border: 'border-[#86efac]',
-    tagBg: 'bg-[#6bff8f]',
-    tagText: 'text-[#004a1d]',
+    bg: '#e8f4ff',
+    iconColor: '#1a84d2',
+    border: 'border-[#86c8ef]',
+    tagBg: 'bg-[#6bb1ff]',
+    tagText: 'text-[#003459]',
     desc: 'MA in Education with 12 years developing outcome-driven curricula for K-12 learners.',
   },
   {
@@ -49,11 +49,11 @@ const teamMembers = [
     name: 'Yusuf Malik',
     role: 'Quran & Islamic Studies',
     icon: 'import_contacts',
-    bg: '#e8fff4',
-    iconColor: '#006a2d',
-    border: 'border-[#86efac]',
-    tagBg: 'bg-[#6bff8f]',
-    tagText: 'text-[#004a1d]',
+    bg: '#e8f4ff',
+    iconColor: '#1a84d2',
+    border: 'border-[#86c8ef]',
+    tagBg: 'bg-[#6bb1ff]',
+    tagText: 'text-[#003459]',
     desc: 'Hafiz ul Quran with ijazah in Tajweed, bringing warmth and patience to every class.',
   },
   {
@@ -97,7 +97,7 @@ export default function AboutPage() {
       {/* ── HERO ── */}
       <section className="relative py-20 px-6 md:px-8 bg-black border-b-4 border-black overflow-hidden">
         {/* dot grid */}
-        <div className="absolute inset-0 bg-[radial-gradient(#6bff8f_1px,transparent_1px)] [background-size:28px_28px] opacity-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(#6bb1ff_1px,transparent_1px)] [background-size:28px_28px] opacity-10 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
@@ -106,8 +106,8 @@ export default function AboutPage() {
             transition={{ duration: 0.55, ease: 'easeOut' }}
           >
             <span
-              className="inline-block bg-[#6bff8f] border-2 border-[#6bff8f] px-4 py-1 font-black text-xs uppercase tracking-widest mb-6 shadow-[3px_3px_0px_0px_rgba(107,255,143,0.5)]"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#004a1d' }}
+              className="inline-block bg-[#6bb1ff] border-2 border-[#6bb1ff] px-4 py-1 font-black text-xs uppercase tracking-widest mb-6 shadow-[3px_3px_0px_0px_rgba(107,255,143,0.5)]"
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#003459' }}
             >
               Our Story
             </span>
@@ -116,7 +116,7 @@ export default function AboutPage() {
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
               We Are<br />
-              <span style={{ color: '#6bff8f' }}>Mind Masters</span>
+              <span style={{ color: '#6bb1ff' }}>Mind Masters</span>
             </h1>
             <p
               className="text-lg md:text-xl font-bold text-[#aaa] max-w-2xl leading-relaxed mb-10"
@@ -127,7 +127,7 @@ export default function AboutPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/apply"
-                className="brutalist-button bg-[#6bff8f] text-black font-black px-8 py-4 border-4 border-[#6bff8f] rounded-xl shadow-[6px_6px_0px_0px_rgba(107,255,143,0.4)] text-base"
+                className="brutalist-button bg-[#6bb1ff] text-black font-black px-8 py-4 border-4 border-[#6bb1ff] rounded-xl shadow-[6px_6px_0px_0px_rgba(107,255,143,0.4)] text-base"
                 style={{ fontFamily: 'var(--font-space-grotesk)' }}
               >
                 Apply Now →
@@ -250,7 +250,7 @@ export default function AboutPage() {
                   To inspire a lifelong love of learning by delivering world-class education enriched with strong moral and Islamic values — shaping tomorrow's leaders today.
                 </p>
               </div>
-              <div className="bg-[#006a2d] border-4 border-black rounded-2xl p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              <div className="bg-[#1a84d2] border-4 border-black rounded-2xl p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                 <span
                   className="material-symbols-outlined text-5xl text-white mb-4 block"
                   style={{ fontVariationSettings: "'FILL' 1" }}
@@ -264,7 +264,7 @@ export default function AboutPage() {
                   Our Vision
                 </h3>
                 <p
-                  className="font-bold text-sm text-[#86efac] leading-relaxed"
+                  className="font-bold text-sm text-[#86c8ef] leading-relaxed"
                   style={{ fontFamily: 'var(--font-manrope)' }}
                 >
                   To be the most trusted educational partner for families — a place where every student discovers their potential and steps into the future with confidence and purpose.
@@ -286,7 +286,7 @@ export default function AboutPage() {
             className="mb-12"
           >
             <span
-              className="inline-block bg-[#6bff8f] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+              className="inline-block bg-[#6bb1ff] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
               Founder
@@ -376,9 +376,9 @@ export default function AboutPage() {
                   <span className="material-symbols-outlined text-base text-[#8126cf]" style={{ fontVariationSettings: "'FILL' 1" }}>school</span>
                   <span className="font-black text-xs text-[#4f0089]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>PhD Education</span>
                 </div>
-                <div className="bg-[#e8fff4] border-2 border-[#86efac] rounded-xl px-4 py-2 flex items-center gap-2">
-                  <span className="material-symbols-outlined text-base text-[#006a2d]" style={{ fontVariationSettings: "'FILL' 1" }}>workspace_premium</span>
-                  <span className="font-black text-xs text-[#004a1d]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>15+ Years Teaching</span>
+                <div className="bg-[#e8f4ff] border-2 border-[#86c8ef] rounded-xl px-4 py-2 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-base text-[#1a84d2]" style={{ fontVariationSettings: "'FILL' 1" }}>workspace_premium</span>
+                  <span className="font-black text-xs text-[#003459]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>15+ Years Teaching</span>
                 </div>
                 <div className="bg-[#fffbe8] border-2 border-[#fde68a] rounded-xl px-4 py-2 flex items-center gap-2">
                   <span className="material-symbols-outlined text-base text-[#6a5b00]" style={{ fontVariationSettings: "'FILL' 1" }}>mosque</span>
@@ -489,7 +489,7 @@ export default function AboutPage() {
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
               Become Part of<br />
-              <span style={{ color: '#6bff8f' }}>Our Community</span>
+              <span style={{ color: '#6bb1ff' }}>Our Community</span>
             </h2>
             <p
               className="text-lg font-bold text-[#aaa] mt-2"
@@ -501,7 +501,7 @@ export default function AboutPage() {
           <div className="flex flex-wrap gap-4">
             <Link
               href="/apply"
-              className="brutalist-button bg-[#6bff8f] text-black font-black text-base px-8 py-4 border-4 border-[#6bff8f] rounded-xl shadow-[6px_6px_0px_0px_rgba(107,255,143,0.4)] whitespace-nowrap"
+              className="brutalist-button bg-[#6bb1ff] text-black font-black text-base px-8 py-4 border-4 border-[#6bb1ff] rounded-xl shadow-[6px_6px_0px_0px_rgba(107,255,143,0.4)] whitespace-nowrap"
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
               Apply Now →

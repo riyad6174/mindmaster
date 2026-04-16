@@ -158,7 +158,7 @@ export default function NewsDetailPage({ params }: { params: Promise<{ slug: str
                 className="brutalist-button font-black text-sm px-6 py-3 border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(107,255,143,0.5)] text-black whitespace-nowrap"
                 style={{
                   fontFamily: 'var(--font-space-grotesk)',
-                  backgroundColor: '#6bff8f',
+                  backgroundColor: '#6bb1ff',
                 }}
               >
                 Contact Us →

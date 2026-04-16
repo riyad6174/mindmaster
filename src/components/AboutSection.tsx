@@ -5,13 +5,13 @@ import { motion, type Variants } from 'framer-motion';
 
 const programs = [
   { icon: 'toys',               label: 'Play Based Learning', sub: 'Learn through play',     bg: 'bg-white', iconColor: 'text-[#8126cf]', border: 'border-black' },
-  { icon: 'volunteer_activism', label: 'Islamic Manners',     sub: 'Character & values',     bg: 'bg-white', iconColor: 'text-[#006a2d]', border: 'border-black' },
+  { icon: 'language',           label: 'English Learning',    sub: 'Complete ESL guidance',  bg: 'bg-white', iconColor: 'text-[#1a84d2]', border: 'border-black' },
   { icon: 'menu_book',          label: 'Early Literacy',      sub: 'Read & write skills',    bg: 'bg-white', iconColor: 'text-[#6a5b00]', border: 'border-black' },
   { icon: 'palette',            label: 'Arts and Crafts',     sub: 'Create & express',       bg: 'bg-white', iconColor: 'text-[#8126cf]', border: 'border-black' },
-  { icon: 'construction',       label: 'Skill Development',   sub: 'Hands-on building',      bg: 'bg-white', iconColor: 'text-[#006a2d]', border: 'border-black' },
-  { icon: 'import_contacts',    label: 'Quran Reading',       sub: 'Guided recitation',      bg: 'bg-white', iconColor: 'text-[#6a5b00]', border: 'border-black' },
+  { icon: 'construction',       label: 'Skill Development',   sub: 'Hands-on building',      bg: 'bg-white', iconColor: 'text-[#1a84d2]', border: 'border-black' },
+  { icon: 'school',             label: 'IELTS Preparation',   sub: 'Exam strategies given',  bg: 'bg-white', iconColor: 'text-[#6a5b00]', border: 'border-black' },
   { icon: 'lightbulb',          label: 'Creative Activities', sub: 'Imagination unleashed',  bg: 'bg-white', iconColor: 'text-[#8126cf]', border: 'border-black' },
-  { icon: 'park',               label: 'Outdoor Play',        sub: 'Active & energetic',     bg: 'bg-white', iconColor: 'text-[#006a2d]', border: 'border-black' },
+  { icon: 'park',               label: 'Outdoor Play',        sub: 'Active & energetic',     bg: 'bg-white', iconColor: 'text-[#1a84d2]', border: 'border-black' },
 ];
 
 const stats = [
@@ -68,7 +68,7 @@ export default function AboutSection() {
           viewport={{ once: true, amount: 0.2 }}
         >
           <span
-            className='inline-block bg-[#6bff8f] border-2 border-black px-4 py-1 font-black text-sm uppercase tracking-widest mb-6 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
+            className='inline-block bg-[#6bb1ff] border-2 border-black px-4 py-1 font-black text-sm uppercase tracking-widest mb-6 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
             style={{ fontFamily: 'var(--font-space-grotesk)' }}
           >
             About Us
@@ -141,7 +141,7 @@ export default function AboutSection() {
             </p>
             <Link
               href='/programs'
-              className='brutalist-button bg-black text-white font-black text-sm px-5 py-2.5 border-4 border-black rounded-lg shadow-[3px_3px_0px_0px_rgba(107,255,143,1)]'
+              className='brutalist-button bg-black text-white font-black text-sm px-5 py-2.5 border-4 border-black rounded-lg shadow-[3px_3px_0px_0px_rgba(107,177,255,1)]'
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
               View All Programs

@@ -3,6 +3,7 @@ import { Space_Grotesk, Manrope } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ConditionalLayout from "@/components/ConditionalLayout";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -36,9 +37,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen">
-        <Navbar />
-        {children}
-        <Footer />
+        <ConditionalLayout>
+          {children}
+        </ConditionalLayout>
       </body>
     </html>
   );

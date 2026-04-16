@@ -8,9 +8,9 @@ const contactCards = [
     icon: 'location_on',
     label: 'Address',
     value: '131 Woodward Ave, Regina, SK, Canada, S4R3H5',
-    bg: 'bg-[#e8fff4]',
-    iconColor: 'text-[#006a2d]',
-    border: 'border-[#86efac]',
+    bg: 'bg-[#e8f4ff]',
+    iconColor: 'text-[#1a84d2]',
+    border: 'border-[#86c8ef]',
   },
   {
     icon: 'phone',
@@ -32,9 +32,9 @@ const contactCards = [
     icon: 'schedule',
     label: 'Hours',
     value: 'Mon – Sat  8:00 AM – 8:00 PM',
-    bg: 'bg-[#e8fff4]',
-    iconColor: 'text-[#006a2d]',
-    border: 'border-[#86efac]',
+    bg: 'bg-[#e8f4ff]',
+    iconColor: 'text-[#1a84d2]',
+    border: 'border-[#86c8ef]',
   },
 ];
 
@@ -43,18 +43,33 @@ export default function ContactPage() {
     name: '',
     email: '',
     phone: '',
+    subject: 'General Inquiry',
     message: '',
   });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      if (res.ok) {
+        setSent(true);
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      alert('An error occurred. Please check your connection.');
+    } finally {
       setLoading(false);
-      setSent(true);
-    }, 1200);
+    }
   };
 
   return (
@@ -68,7 +83,7 @@ export default function ContactPage() {
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <span
-              className='inline-block bg-[#6bff8f] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
+              className='inline-block bg-[#6bb1ff] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
               Get In Touch
@@ -117,22 +132,22 @@ export default function ContactPage() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className='bg-[#e8fff4] border-4 border-[#006a2d] rounded-2xl p-8 flex flex-col items-center gap-4 text-center'
+                  className='bg-[#e8f4ff] border-4 border-[#1a84d2] rounded-2xl p-8 flex flex-col items-center gap-4 text-center'
                 >
                   <span
-                    className='material-symbols-outlined text-5xl text-[#006a2d]'
+                    className='material-symbols-outlined text-5xl text-[#1a84d2]'
                     style={{ fontVariationSettings: "'FILL' 1" }}
                   >
                     check_circle
                   </span>
                   <h3
-                    className='text-xl font-black text-[#006a2d]'
+                    className='text-xl font-black text-[#1a84d2]'
                     style={{ fontFamily: 'var(--font-space-grotesk)' }}
                   >
                     Message Sent!
                   </h3>
                   <p
-                    className='font-bold text-sm text-[#006a2d]'
+                    className='font-bold text-sm text-[#1a84d2]'
                     style={{ fontFamily: 'var(--font-manrope)' }}
                   >
                     Thank you for reaching out. We'll get back to you shortly.
@@ -142,7 +157,7 @@ export default function ContactPage() {
                       setSent(false);
                       setForm({ name: '', email: '', phone: '', message: '' });
                     }}
-                    className='brutalist-button bg-[#006a2d] text-white font-black text-sm px-6 py-2.5 border-2 border-black rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
+                    className='brutalist-button bg-[#1a84d2] text-white font-black text-sm px-6 py-2.5 border-2 border-black rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]'
                     style={{ fontFamily: 'var(--font-space-grotesk)' }}
                   >
                     Send Another
@@ -188,6 +203,26 @@ export default function ContactPage() {
                         style={{ fontFamily: 'var(--font-manrope)' }}
                       />
                     </div>
+                  </div>
+
+                  <div className='flex flex-col gap-1.5'>
+                    <label
+                      className='font-black text-xs uppercase tracking-wide text-[#1a1a1a]'
+                      style={{ fontFamily: 'var(--font-space-grotesk)' }}
+                    >
+                      Subject <span className='text-[#8126cf]'>*</span>
+                    </label>
+                    <input
+                      type='text'
+                      required
+                      placeholder='What is this about?'
+                      value={form.subject}
+                      onChange={(e) =>
+                        setForm({ ...form, subject: e.target.value })
+                      }
+                      className='border-2 border-[#e2e2e2] focus:border-black rounded-xl px-4 py-3 font-bold text-sm outline-none transition-colors bg-[#f8f9fa] focus:bg-white'
+                      style={{ fontFamily: 'var(--font-manrope)' }}
+                    />
                   </div>
 
                   <div className='flex flex-col gap-1.5'>

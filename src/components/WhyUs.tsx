@@ -5,12 +5,12 @@ import { motion, type Variants } from 'framer-motion';
 const reasons = [
   {
     icon: 'lightbulb',
-    iconColor: 'text-[#006a2d]',
-    iconBg: 'bg-[#e8fff4]',
-    borderColor: 'border-[#006a2d]',
+    iconColor: 'text-[#1a84d2]',
+    iconBg: 'bg-[#e8f4ff]',
+    borderColor: 'border-[#1a84d2]',
     shadowColor: 'rgba(0,106,45,0.25)',
     num: '01',
-    numColor: 'text-[#86efac]',
+    numColor: 'text-[#86c8ef]',
     title: 'Customized Learning',
     body: 'Every student gets a unique AI-powered curriculum tailored to their pace and learning style.',
   },
@@ -38,12 +38,12 @@ const reasons = [
   },
   {
     icon: 'shield',
-    iconColor: 'text-[#006a2d]',
-    iconBg: 'bg-[#e8fff4]',
-    borderColor: 'border-[#006a2d]',
+    iconColor: 'text-[#1a84d2]',
+    iconBg: 'bg-[#e8f4ff]',
+    borderColor: 'border-[#1a84d2]',
     shadowColor: 'rgba(0,106,45,0.25)',
     num: '04',
-    numColor: 'text-[#86efac]',
+    numColor: 'text-[#86c8ef]',
     title: 'Safe Environment',
     body: 'A nurturing, inclusive space where every student feels seen, valued, and empowered to grow.',
   },
@@ -96,7 +96,7 @@ export default function WhyUs() {
         >
           <div>
             <span
-              className="inline-block bg-[#6bff8f] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+              className="inline-block bg-[#6bb1ff] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
               Our Advantage

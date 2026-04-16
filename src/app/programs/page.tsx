@@ -5,6 +5,59 @@ import Link from 'next/link';
 
 const programs = [
   {
+    id: 'after-school',
+    badge: 'After School',
+    title: 'After School Program',
+    subtitle: 'Grades 4-12',
+    description: 'Sunshine Program (Grades 4-8), Freshman/Sophomore Math & Science (Grades 8-10), and Junior/Senior Math & Science (Grades 11-12) to support academic growth.',
+    details: [
+      { icon: 'school', label: 'Grades', value: 'Grade 4 - Grade 12' },
+      { icon: 'payments', label: 'Fees', value: 'Contact for pricing' },
+      { icon: 'schedule', label: 'Schedule', value: 'Weekdays · After school hours' },
+      { icon: 'location_on', label: 'Location', value: 'Mind Masters Edu Center' },
+    ],
+    features: [
+      'Sunshine Program (Grades 4-8)',
+      'Freshman/Sophomore Math & Science',
+      'Junior/Senior Math & Science',
+      'Curriculum-aligned support'
+    ],
+    accentColor: '#1a84d2',
+    accentBg: '#e8f4ff',
+    borderColor: 'border-[#86c8ef]',
+    tagBg: 'bg-[#6bb1ff]',
+    tagText: 'text-[#003459]',
+    icon: 'local_library',
+    contact: 'Contact us to enroll',
+  },
+  {
+    id: 'university-support',
+    badge: 'University Support',
+    title: 'University Support',
+    subtitle: 'Admission & Tutoring',
+    description: 'Comprehensive University-Level Tutoring, Top 10 Canadian Universities Admission Preparation, IELTS Preparation, and On-Demand Hourly Tutoring to help you succeed in higher education.',
+    details: [
+      { icon: 'school', label: 'Level', value: 'Pre-University & University' },
+      { icon: 'payments', label: 'Fees', value: 'Contact for pricing' },
+      { icon: 'schedule', label: 'Schedule', value: 'Flexible scheduling' },
+      { icon: 'location_on', label: 'Location', value: 'Mind Masters Edu Center & Online' },
+    ],
+    features: [
+      'University-Level Tutoring',
+      'Top 10 Admission Prep',
+      'IELTS Preparation',
+      'On-Demand Hourly Tutoring'
+    ],
+    accentColor: '#6a5b00',
+    accentBg: '#fffbe8',
+    borderColor: 'border-[#fde68a]',
+    tagBg: 'bg-[#fcdf46]',
+    tagText: 'text-[#483d00]',
+    icon: 'account_balance',
+    contact: 'Contact us to enroll',
+  },
+  {
+    id: 'krazy-math',
     badge: 'After School Club',
     title: 'Krazy Math Tutorial',
     subtitle: 'Advanced After School Program',
@@ -22,15 +75,16 @@ const programs = [
       'Grades 2 through 12',
       '$50 sibling discount',
     ],
-    accentColor: '#006a2d',
-    accentBg: '#e8fff4',
-    borderColor: 'border-[#86efac]',
-    tagBg: 'bg-[#6bff8f]',
-    tagText: 'text-[#004a1d]',
+    accentColor: '#8126cf',
+    accentBg: '#f5e8ff',
+    borderColor: 'border-[#c4b5fd]',
+    tagBg: 'bg-[#e5c6ff]',
+    tagText: 'text-[#4f0089]',
     icon: 'calculate',
     contact: '+1 (306) 515-3614',
   },
   {
+    id: 'preschool',
     badge: 'Preschool',
     title: 'Preschool Program',
     subtitle: 'Darul Falah Islamic Centre',
@@ -48,118 +102,14 @@ const programs = [
       'Islamic values & character building',
       'Safe & nurturing environment',
     ],
-    accentColor: '#8126cf',
-    accentBg: '#f5e8ff',
-    borderColor: 'border-[#c4b5fd]',
-    tagBg: 'bg-[#e5c6ff]',
-    tagText: 'text-[#4f0089]',
+    accentColor: '#1a84d2',
+    accentBg: '#e8f4ff',
+    borderColor: 'border-[#86c8ef]',
+    tagBg: 'bg-[#6bb1ff]',
+    tagText: 'text-[#003459]',
     icon: 'child_care',
     contact: 'Contact for details',
-  },
-  {
-    badge: 'Elementary',
-    title: 'Elementary Explorers',
-    subtitle: 'Grades 1 – 5',
-    description:
-      'Nurturing curiosity through project-based learning and foundational literacy skills. Students develop a love for learning through hands-on experiments and collaborative activities.',
-    details: [
-      { icon: 'school', label: 'Grades', value: 'Grade 1 – Grade 5' },
-      { icon: 'payments', label: 'Fees', value: 'Contact for pricing' },
-      { icon: 'schedule', label: 'Schedule', value: 'Weekdays · After school hours' },
-      { icon: 'location_on', label: 'Location', value: 'Mind Masters Edu Center' },
-    ],
-    features: [
-      'Project-based learning approach',
-      'Foundational literacy & numeracy',
-      'Creative arts & STEM activities',
-      'Small class sizes',
-    ],
-    accentColor: '#6a5b00',
-    accentBg: '#fffbe8',
-    borderColor: 'border-[#fde68a]',
-    tagBg: 'bg-[#fcdf46]',
-    tagText: 'text-[#483d00]',
-    icon: 'auto_stories',
-    contact: 'Contact us to enroll',
-  },
-  {
-    badge: 'Middle School',
-    title: 'Middle Mindset',
-    subtitle: 'Grades 6 – 8',
-    description:
-      'Building critical thinking and social-emotional skills in a digital-first environment. Students tackle real-world problems through group projects and technology-driven curriculum.',
-    details: [
-      { icon: 'school', label: 'Grades', value: 'Grade 6 – Grade 8' },
-      { icon: 'payments', label: 'Fees', value: 'Contact for pricing' },
-      { icon: 'schedule', label: 'Schedule', value: 'Weekdays · After school hours' },
-      { icon: 'location_on', label: 'Location', value: 'Mind Masters Edu Center' },
-    ],
-    features: [
-      'Critical thinking & debate skills',
-      'Digital literacy & coding basics',
-      'Social-emotional learning',
-      'Mentorship program',
-    ],
-    accentColor: '#8126cf',
-    accentBg: '#f5e8ff',
-    borderColor: 'border-[#c4b5fd]',
-    tagBg: 'bg-[#e5c6ff]',
-    tagText: 'text-[#4f0089]',
-    icon: 'psychology',
-    contact: 'Contact us to enroll',
-  },
-  {
-    badge: 'High School',
-    title: 'Academy of Leaders',
-    subtitle: 'Grades 9 – 12',
-    description:
-      'Advanced placement and career counseling for university readiness and beyond. Students develop leadership skills, explore career pathways, and prepare for post-secondary success.',
-    details: [
-      { icon: 'school', label: 'Grades', value: 'Grade 9 – Grade 12' },
-      { icon: 'payments', label: 'Fees', value: 'Contact for pricing' },
-      { icon: 'schedule', label: 'Schedule', value: 'Weekdays · Evening sessions' },
-      { icon: 'location_on', label: 'Location', value: 'Mind Masters Edu Center' },
-    ],
-    features: [
-      'University application support',
-      'Career counseling & pathways',
-      'Leadership development',
-      'Advanced subject tutoring',
-    ],
-    accentColor: '#006a2d',
-    accentBg: '#e8fff4',
-    borderColor: 'border-[#86efac]',
-    tagBg: 'bg-[#6bff8f]',
-    tagText: 'text-[#004a1d]',
-    icon: 'emoji_events',
-    contact: 'Contact us to enroll',
-  },
-  {
-    badge: 'Quran & Islamic Studies',
-    title: 'Quran & Islamic Studies',
-    subtitle: 'All Age Groups',
-    description:
-      'Structured Quran reading, memorization, and Islamic studies classes taught by qualified instructors. Programs available for children and adults across all skill levels.',
-    details: [
-      { icon: 'person', label: 'Age Group', value: 'All ages welcome' },
-      { icon: 'payments', label: 'Fees', value: 'Contact for pricing' },
-      { icon: 'schedule', label: 'Schedule', value: 'Flexible scheduling available' },
-      { icon: 'mosque', label: 'Centre', value: 'Mind Masters Edu Center' },
-    ],
-    features: [
-      'Quran recitation & Tajweed',
-      'Quran memorization (Hifz)',
-      'Islamic studies & Seerah',
-      'Flexible class timings',
-    ],
-    accentColor: '#6a5b00',
-    accentBg: '#fffbe8',
-    borderColor: 'border-[#fde68a]',
-    tagBg: 'bg-[#fcdf46]',
-    tagText: 'text-[#483d00]',
-    icon: 'import_contacts',
-    contact: 'Contact us to enroll',
-  },
+  }
 ];
 
 const stagger: Variants = {
@@ -185,7 +135,7 @@ export default function ProgramsPage() {
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <span
-              className="inline-block bg-[#6bff8f] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+              className="inline-block bg-[#6bb1ff] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
               All Programs
@@ -348,10 +298,10 @@ export default function ProgramsPage() {
                       >
                         info
                       </span>
-                      See Details
+                      Know More
                     </Link>
                     <Link
-                      href="/apply"
+                      href={`/apply?program=${prog.id}`}
                       className="brutalist-button font-black text-sm px-4 py-2.5 border-4 border-black rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex items-center gap-1.5 text-white"
                       style={{
                         fontFamily: 'var(--font-space-grotesk)',
@@ -393,7 +343,7 @@ export default function ProgramsPage() {
           </div>
           <Link
             href="/contact"
-            className="brutalist-button bg-[#6bff8f] text-black font-black text-lg px-10 py-4 border-4 border-[#6bff8f] rounded-xl shadow-[6px_6px_0px_0px_rgba(107,255,143,0.4)] whitespace-nowrap"
+            className="brutalist-button bg-[#6bb1ff] text-black font-black text-lg px-10 py-4 border-4 border-[#6bb1ff] rounded-xl shadow-[6px_6px_0px_0px_rgba(107,255,143,0.4)] whitespace-nowrap"
             style={{ fontFamily: 'var(--font-space-grotesk)' }}
           >
             Contact Us →

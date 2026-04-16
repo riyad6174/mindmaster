@@ -2,14 +2,14 @@
 
 @theme {
   /* Colors */
-  --color-primary: #006a2d;
-  --color-primary-fixed: #6bff8f;
+  --color-primary: #1a84d2;
+  --color-primary-fixed: #6bb1ff;
   --color-primary-fixed-dim: #5bf083;
   --color-primary-dim: #005d26;
   --color-on-primary: #ceffd0;
-  --color-on-primary-fixed: #004a1d;
-  --color-on-primary-fixed-variant: #006a2d;
-  --color-primary-container: #6bff8f;
+  --color-on-primary-fixed: #003459;
+  --color-on-primary-fixed-variant: #1a84d2;
+  --color-primary-container: #6bb1ff;
   --color-on-primary-container: #005f28;
 
   --color-secondary: #8126cf;
@@ -42,7 +42,7 @@
   --color-surface-dim: #d4d4d4;
   --color-surface-bright: #f6f6f6;
   --color-surface-variant: #dddddd;
-  --color-surface-tint: #006a2d;
+  --color-surface-tint: #1a84d2;
   --color-on-surface: #2f2f2f;
   --color-on-surface-variant: #5b5b5b;
   --color-surface-container-lowest: #ffffff;
@@ -58,7 +58,7 @@
   --color-outline-variant: #adadad;
   --color-inverse-surface: #0e0e0e;
   --color-inverse-on-surface: #9d9d9d;
-  --color-inverse-primary: #6bff8f;
+  --color-inverse-primary: #6bb1ff;
 
   /* Typography */
   --font-headline: "Space Grotesk", sans-serif;
@@ -163,3 +163,219 @@ body {
 ::selection {
   background-color: #fcdf46;
 }
+
+/* ─────────────────────────────────────────
+   React Big Calendar – Brutalist Overrides
+───────────────────────────────────────── */
+.mm-calendar-wrapper .rbc-calendar {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: #fff;
+}
+
+/* Toolbar */
+.mm-calendar-wrapper .rbc-toolbar {
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid #1a1a1a;
+}
+
+.mm-calendar-wrapper .rbc-toolbar button {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 2px solid #1a1a1a;
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  background: #fff;
+  color: #1a1a1a;
+  transition: all 0.1s;
+  box-shadow: 2px 2px 0 0 rgba(0,0,0,1);
+}
+
+.mm-calendar-wrapper .rbc-toolbar button:hover {
+  background: #f1f1f1;
+}
+
+.mm-calendar-wrapper .rbc-toolbar button:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.mm-calendar-wrapper .rbc-toolbar button.rbc-active {
+  background: #1a84d2;
+  color: #fff;
+  border-color: #003459;
+  box-shadow: 2px 2px 0 0 #003459;
+}
+
+.mm-calendar-wrapper .rbc-toolbar-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+  order: -1;
+  flex: 1;
+}
+
+/* Month view header (day names) */
+.mm-calendar-wrapper .rbc-month-header,
+.mm-calendar-wrapper .rbc-header {
+  border-bottom: 3px solid #1a1a1a;
+  border-right: 2px solid #1a1a1a;
+  background: #1a84d2;
+}
+
+.mm-calendar-wrapper .rbc-header {
+  padding: 10px 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fff;
+}
+
+.mm-calendar-wrapper .rbc-header:last-child {
+  border-right: none;
+}
+
+/* Month view cells */
+.mm-calendar-wrapper .rbc-month-view {
+  border: 3px solid #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 6px 6px 0 0 rgba(0,0,0,1);
+}
+
+.mm-calendar-wrapper .rbc-month-row {
+  border-top: 2px solid #e2e2e2;
+}
+
+.mm-calendar-wrapper .rbc-day-bg {
+  border-right: 2px solid #e2e2e2;
+  transition: background 0.15s;
+}
+
+.mm-calendar-wrapper .rbc-day-bg:last-child {
+  border-right: none;
+}
+
+.mm-calendar-wrapper .rbc-day-bg:hover {
+  background: #f5faff;
+}
+
+.mm-calendar-wrapper .rbc-today {
+  background-color: #e8f4ff !important;
+}
+
+.mm-calendar-wrapper .rbc-date-cell {
+  padding: 6px 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: #1a1a1a;
+}
+
+.mm-calendar-wrapper .rbc-date-cell.rbc-now {
+  font-size: 13px;
+  color: #1a84d2;
+}
+
+.mm-calendar-wrapper .rbc-off-range-bg {
+  background: #f8f9fa;
+}
+
+.mm-calendar-wrapper .rbc-off-range .rbc-button-link {
+  color: #bbb;
+}
+
+/* Events */
+.mm-calendar-wrapper .rbc-event,
+.mm-calendar-wrapper .rbc-event:focus {
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  outline: none;
+  box-shadow: 2px 2px 0 0 rgba(0,0,0,0.5);
+}
+
+.mm-calendar-wrapper .rbc-selected {
+  box-shadow: 3px 3px 0 0 rgba(0,0,0,1) !important;
+  transform: translate(-1px, -1px);
+}
+
+/* Show more link */
+.mm-calendar-wrapper .rbc-show-more {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  color: #1a84d2;
+  background: none;
+  text-decoration: none;
+}
+
+/* Week/Day view */
+.mm-calendar-wrapper .rbc-time-view {
+  border: 3px solid #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 6px 6px 0 0 rgba(0,0,0,1);
+}
+
+.mm-calendar-wrapper .rbc-time-header {
+  border-bottom: 3px solid #1a1a1a;
+}
+
+.mm-calendar-wrapper .rbc-timeslot-group {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.mm-calendar-wrapper .rbc-time-slot {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: #5b5b5b;
+}
+
+/* Agenda view */
+.mm-calendar-wrapper .rbc-agenda-view table {
+  border: 2px solid #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mm-calendar-wrapper .rbc-agenda-view table thead {
+  background: #1a84d2;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.mm-calendar-wrapper .rbc-agenda-date-cell,
+.mm-calendar-wrapper .rbc-agenda-time-cell,
+.mm-calendar-wrapper .rbc-agenda-event-cell {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  border-color: #e2e2e2;
+  padding: 8px 12px;
+}
+
+.mm-calendar-wrapper .rbc-agenda-view table .rbc-agenda-date-cell {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  color: #1a84d2;
+}
+
