@@ -7,7 +7,8 @@ const reasons = [
     icon: 'lightbulb',
     iconColor: 'text-[#006a2d]',
     iconBg: 'bg-[#e8fff4]',
-    borderColor: 'border-[#86efac]',
+    borderColor: 'border-[#006a2d]',
+    shadowColor: 'rgba(0,106,45,0.25)',
     num: '01',
     numColor: 'text-[#86efac]',
     title: 'Customized Learning',
@@ -17,7 +18,8 @@ const reasons = [
     icon: 'diversity_3',
     iconColor: 'text-[#8126cf]',
     iconBg: 'bg-[#f5e8ff]',
-    borderColor: 'border-[#c4b5fd]',
+    borderColor: 'border-[#8126cf]',
+    shadowColor: 'rgba(129,38,207,0.25)',
     num: '02',
     numColor: 'text-[#c4b5fd]',
     title: 'Mentorship First',
@@ -27,7 +29,8 @@ const reasons = [
     icon: 'rocket_launch',
     iconColor: 'text-[#6a5b00]',
     iconBg: 'bg-[#fffbe8]',
-    borderColor: 'border-[#fde68a]',
+    borderColor: 'border-[#d4a800]',
+    shadowColor: 'rgba(212,168,0,0.35)',
     num: '03',
     numColor: 'text-[#fde68a]',
     title: 'Future-Proof Skills',
@@ -37,7 +40,8 @@ const reasons = [
     icon: 'shield',
     iconColor: 'text-[#006a2d]',
     iconBg: 'bg-[#e8fff4]',
-    borderColor: 'border-[#86efac]',
+    borderColor: 'border-[#006a2d]',
+    shadowColor: 'rgba(0,106,45,0.25)',
     num: '04',
     numColor: 'text-[#86efac]',
     title: 'Safe Environment',
@@ -47,7 +51,8 @@ const reasons = [
     icon: 'emoji_events',
     iconColor: 'text-[#8126cf]',
     iconBg: 'bg-[#f5e8ff]',
-    borderColor: 'border-[#c4b5fd]',
+    borderColor: 'border-[#8126cf]',
+    shadowColor: 'rgba(129,38,207,0.25)',
     num: '05',
     numColor: 'text-[#c4b5fd]',
     title: 'Proven Results',
@@ -57,7 +62,8 @@ const reasons = [
     icon: 'groups',
     iconColor: 'text-[#6a5b00]',
     iconBg: 'bg-[#fffbe8]',
-    borderColor: 'border-[#fde68a]',
+    borderColor: 'border-[#d4a800]',
+    shadowColor: 'rgba(212,168,0,0.35)',
     num: '06',
     numColor: 'text-[#fde68a]',
     title: 'Vibrant Community',
@@ -123,7 +129,8 @@ export default function WhyUs() {
               key={r.title}
               variants={cardIn}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className={`relative bg-white border-2 ${r.borderColor} rounded-2xl p-7 shadow-[5px_5px_0px_0px_rgba(0,0,0,0.08)] flex flex-col gap-4 group cursor-default overflow-hidden`}
+              className={`relative bg-white border-[3px] ${r.borderColor} rounded-2xl p-7 flex flex-col gap-4 group cursor-default overflow-hidden`}
+              style={{ boxShadow: `6px 6px 0px 0px ${r.shadowColor}` }}
             >
               {/* Large number watermark */}
               <span
@@ -134,7 +141,7 @@ export default function WhyUs() {
               </span>
 
               {/* Icon */}
-              <div className={`w-14 h-14 ${r.iconBg} border-2 ${r.borderColor} rounded-xl flex items-center justify-center flex-shrink-0`}>
+              <div className={`w-14 h-14 ${r.iconBg} border-2 ${r.borderColor} rounded-xl flex items-center justify-center flex-shrink-0 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.15)]`}>
                 <span
                   className={`material-symbols-outlined text-3xl ${r.iconColor}`}
                   style={{ fontVariationSettings: "'FILL' 1" }}

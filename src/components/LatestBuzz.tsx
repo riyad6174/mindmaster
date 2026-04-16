@@ -1,57 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import { motion, type Variants } from 'framer-motion';
-
-const announcements = [
-  {
-    tag: 'Event',
-    tagStyle: 'bg-[#8126cf] text-white border-2 border-[#8126cf]',
-    cardBg: 'bg-[#f5eeff]',
-    borderColor: 'border-[#c4b5fd]',
-    titleColor: 'text-[#3b0764]',
-    bodyColor: 'text-[#6b21a8]',
-    btnBg: 'bg-[#8126cf]',
-    btnText: 'text-white',
-    shadow: 'shadow-[6px_6px_0px_0px_rgba(129,38,207,0.2)]',
-    rotate: '-rotate-1 hover:rotate-0',
-    title: "Summer Robotics Camp '24",
-    body: 'Build, code, and compete in our month-long intense robotic workshop. Early bird gets the worm!',
-    action: 'Read More',
-    icon: 'precision_manufacturing',
-  },
-  {
-    tag: 'Update',
-    tagStyle: 'bg-[#6a5b00] text-white border-2 border-[#6a5b00]',
-    cardBg: 'bg-[#fffbe8]',
-    borderColor: 'border-[#fde68a]',
-    titleColor: 'text-[#483d00]',
-    bodyColor: 'text-[#6a5b00]',
-    btnBg: 'bg-[#fcdf46]',
-    btnText: 'text-[#483d00]',
-    shadow: 'shadow-[6px_6px_0px_0px_rgba(252,223,70,0.35)]',
-    rotate: 'rotate-1 hover:rotate-0',
-    title: 'New Virtual Reality Lab',
-    body: 'Explore the solar system or walk through history with our brand new state-of-the-art VR headsets.',
-    action: 'Tour the Lab',
-    icon: 'vrpano',
-  },
-  {
-    tag: 'Win',
-    tagStyle: 'bg-[#006a2d] text-white border-2 border-[#006a2d]',
-    cardBg: 'bg-[#edfff3]',
-    borderColor: 'border-[#86efac]',
-    titleColor: 'text-[#004a1d]',
-    bodyColor: 'text-[#006a2d]',
-    btnBg: 'bg-[#6bff8f]',
-    btnText: 'text-[#004a1d]',
-    shadow: 'shadow-[6px_6px_0px_0px_rgba(107,255,143,0.3)]',
-    rotate: '-rotate-1 hover:rotate-0',
-    title: 'Math Olympiad Winners',
-    body: 'Shoutout to our Grade 8 team for clinching the regional gold trophy this weekend!',
-    action: 'View Gallery',
-    icon: 'emoji_events',
-  },
-];
+import { buzzItems } from '@/data/buzz';
 
 const stagger: Variants = {
   hidden: {},
@@ -95,12 +46,12 @@ export default function LatestBuzz() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          {announcements.map((item) => (
+          {buzzItems.map((item) => (
             <motion.div
               key={item.title}
               variants={cardVariant}
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className={`${item.cardBg} p-8 border-2 ${item.borderColor} rounded-2xl ${item.shadow} ${item.rotate} transition-transform flex flex-col cursor-pointer`}
+              className={`${item.cardBg} p-8 border-2 ${item.borderColor} rounded-2xl ${item.shadow} ${item.rotate} transition-transform flex flex-col`}
             >
               <div className="flex items-center justify-between mb-5">
                 <span
@@ -129,12 +80,13 @@ export default function LatestBuzz() {
               >
                 {item.body}
               </p>
-              <button
+              <Link
+                href={`/news/${item.slug}`}
                 className={`brutalist-button ${item.btnBg} ${item.btnText} font-black text-sm px-5 py-2.5 border-2 border-black rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] self-start`}
                 style={{ fontFamily: 'var(--font-space-grotesk)' }}
               >
-                {item.action} →
-              </button>
+                Read More →
+              </Link>
             </motion.div>
           ))}
         </motion.div>

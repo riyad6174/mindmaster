@@ -1,56 +1,17 @@
 'use client';
 
+import Link from 'next/link';
 import { motion, type Variants } from 'framer-motion';
 
 const programs = [
-  {
-    icon: 'code',
-    label: 'Creative Coding',
-    sub: 'Python, JS & more',
-    bg: 'bg-[#f5e8ff]',
-    iconColor: 'text-[#8126cf]',
-    border: 'border-[#c4b5fd]',
-  },
-  {
-    icon: 'precision_manufacturing',
-    label: 'Robotics Lab',
-    sub: 'Build & program',
-    bg: 'bg-[#e8fff4]',
-    iconColor: 'text-[#006a2d]',
-    border: 'border-[#86efac]',
-  },
-  {
-    icon: 'palette',
-    label: 'Art & Design',
-    sub: 'Digital & traditional',
-    bg: 'bg-[#fffbe8]',
-    iconColor: 'text-[#6a5b00]',
-    border: 'border-[#fde68a]',
-  },
-  {
-    icon: 'science',
-    label: 'Science Lab',
-    sub: 'Experiments daily',
-    bg: 'bg-[#e8fff4]',
-    iconColor: 'text-[#006a2d]',
-    border: 'border-[#86efac]',
-  },
-  {
-    icon: 'calculate',
-    label: 'Math Olympiad',
-    sub: 'Competition prep',
-    bg: 'bg-[#f5e8ff]',
-    iconColor: 'text-[#8126cf]',
-    border: 'border-[#c4b5fd]',
-  },
-  {
-    icon: 'record_voice_over',
-    label: 'Debate & Speech',
-    sub: 'Build confidence',
-    bg: 'bg-[#fffbe8]',
-    iconColor: 'text-[#6a5b00]',
-    border: 'border-[#fde68a]',
-  },
+  { icon: 'toys',               label: 'Play Based Learning', sub: 'Learn through play',     bg: 'bg-white', iconColor: 'text-[#8126cf]', border: 'border-black' },
+  { icon: 'volunteer_activism', label: 'Islamic Manners',     sub: 'Character & values',     bg: 'bg-white', iconColor: 'text-[#006a2d]', border: 'border-black' },
+  { icon: 'menu_book',          label: 'Early Literacy',      sub: 'Read & write skills',    bg: 'bg-white', iconColor: 'text-[#6a5b00]', border: 'border-black' },
+  { icon: 'palette',            label: 'Arts and Crafts',     sub: 'Create & express',       bg: 'bg-white', iconColor: 'text-[#8126cf]', border: 'border-black' },
+  { icon: 'construction',       label: 'Skill Development',   sub: 'Hands-on building',      bg: 'bg-white', iconColor: 'text-[#006a2d]', border: 'border-black' },
+  { icon: 'import_contacts',    label: 'Quran Reading',       sub: 'Guided recitation',      bg: 'bg-white', iconColor: 'text-[#6a5b00]', border: 'border-black' },
+  { icon: 'lightbulb',          label: 'Creative Activities', sub: 'Imagination unleashed',  bg: 'bg-white', iconColor: 'text-[#8126cf]', border: 'border-black' },
+  { icon: 'park',               label: 'Outdoor Play',        sub: 'Active & energetic',     bg: 'bg-white', iconColor: 'text-[#006a2d]', border: 'border-black' },
 ];
 
 const stats = [
@@ -119,8 +80,7 @@ export default function AboutSection() {
           >
             We Are
             <br />
-            <span className='text-[#8126cf]'>Mind</span>{' '}
-            <span className='text-[#006a2d]'>Masters</span>
+            <span style={{ color: '#6a5b00' }}>Mind Masters</span>
           </h2>
 
           <p
@@ -156,13 +116,13 @@ export default function AboutSection() {
             ))}
           </div>
 
-          <a
-            href='#programs'
-            className='brutalist-button inline-block bg-[#8126cf] text-white font-black px-8 py-4 border-4 border-black rounded-xl shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]'
+          <Link
+            href='/about'
+            className='brutalist-button inline-block bg-[#fcdf46] text-[#483d00] font-black px-8 py-4 border-4 border-black rounded-xl shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]'
             style={{ fontFamily: 'var(--font-space-grotesk)' }}
           >
             Our Story
-          </a>
+          </Link>
         </motion.div>
 
         {/* RIGHT: program cards */}
@@ -179,12 +139,13 @@ export default function AboutSection() {
             >
               Our Programs
             </p>
-            <button
+            <Link
+              href='/programs'
               className='brutalist-button bg-black text-white font-black text-sm px-5 py-2.5 border-4 border-black rounded-lg shadow-[3px_3px_0px_0px_rgba(107,255,143,1)]'
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
               View All Programs
-            </button>
+            </Link>
           </div>
 
           <motion.div
@@ -199,7 +160,7 @@ export default function AboutSection() {
                 key={prog.label}
                 variants={cardIn}
                 whileHover={{ y: -4, transition: { duration: 0.18 } }}
-                className={`${prog.bg} border-2 ${prog.border} rounded p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] cursor-pointer`}
+                className={`${prog.bg} border-2 ${prog.border} rounded-xl p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer`}
               >
                 <span
                   className={`material-symbols-outlined text-4xl ${prog.iconColor} block mb-3`}

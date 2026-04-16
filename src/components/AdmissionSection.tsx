@@ -128,7 +128,7 @@ export default function AdmissionSection() {
 
           <div className="flex flex-wrap gap-4 w-full">
             <Link
-              href="#contact"
+              href="/contact"
               className="brutalist-button font-black text-xl px-8 py-4 border-4 border-black rounded-xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
               style={{
                 fontFamily: 'var(--font-space-grotesk)',
