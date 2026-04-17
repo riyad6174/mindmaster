@@ -63,7 +63,7 @@ type FormData = {
   address: string;
   enrollDate: string;
   program: Program | '';
-  supportArea: string;
+  supportArea: string[];
   learningFormat: string;
 };
 
@@ -93,7 +93,7 @@ const emptyForm: FormData = {
   address: '',
   enrollDate: '',
   program: '',
-  supportArea: '',
+  supportArea: [],
   learningFormat: '',
 };
 
@@ -136,6 +136,14 @@ function ApplyForm() {
 
   const set = (k: keyof FormData, v: string) =>
     setForm((f) => ({ ...f, [k]: v }));
+
+  const toggleSupportArea = (opt: string) =>
+    setForm((f) => ({
+      ...f,
+      supportArea: f.supportArea.includes(opt)
+        ? f.supportArea.filter((s) => s !== opt)
+        : [...f.supportArea, opt],
+    }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -358,12 +366,39 @@ function ApplyForm() {
                         Primary Area of Support Requested
                       </p>
                       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3'>
-                        {supportAreaOptions.map((opt) => (
-                          <label key={opt} className='flex items-center gap-2 cursor-pointer'>
-                            <input type='radio' name='supportArea' value={opt} checked={form.supportArea === opt} onChange={(e) => set('supportArea', e.target.value)} className='w-4 h-4 cursor-pointer accent-[#1a84d2]' />
-                            <span className='font-bold text-sm text-[#1a1a1a]' style={{ fontFamily: 'var(--font-manrope)' }}>{opt}</span>
-                          </label>
-                        ))}
+                        {supportAreaOptions.map((opt) => {
+                          const checked = form.supportArea.includes(opt);
+                          return (
+                            <label
+                              key={opt}
+                              className={`flex items-center gap-2 cursor-pointer rounded-xl border-2 px-3 py-2 transition-all ${
+                                checked
+                                  ? 'border-black bg-[#e8f4ff] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
+                                  : 'border-[#e2e2e2] bg-[#f8f9fa] hover:border-black'
+                              }`}
+                            >
+                              <div
+                                className={`w-4 h-4 rounded border-2 border-black flex items-center justify-center flex-shrink-0 transition-colors ${
+                                  checked ? 'bg-[#1a84d2]' : 'bg-white'
+                                }`}
+                              >
+                                {checked && (
+                                  <span className='material-symbols-outlined text-[10px] text-white' style={{ fontVariationSettings: "'FILL' 1" }}>
+                                    check
+                                  </span>
+                                )}
+                              </div>
+                              <input
+                                type='checkbox'
+                                value={opt}
+                                checked={checked}
+                                onChange={() => toggleSupportArea(opt)}
+                                className='sr-only'
+                              />
+                              <span className='font-bold text-sm text-[#1a1a1a]' style={{ fontFamily: 'var(--font-manrope)' }}>{opt}</span>
+                            </label>
+                          );
+                        })}
                       </div>
                     </div>
 

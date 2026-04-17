@@ -10,7 +10,7 @@ export interface IEnrollment {
   email: string;
   address: string;
   program: string;
-  supportArea: string;
+  supportArea: string[];
   learningFormat: string;
   enrollDate: string;
   status: 'pending' | 'reviewed' | 'accepted' | 'rejected';
@@ -27,7 +27,7 @@ const EnrollmentSchema = new Schema<IEnrollment>(
     email:          { type: String, required: true, trim: true, lowercase: true },
     address:        { type: String, required: true, trim: true },
     program:        { type: String, required: true, trim: true },
-    supportArea:    { type: String, trim: true },
+    supportArea:    { type: [String], default: [] },
     learningFormat: { type: String, trim: true },
     enrollDate:     { type: String, required: true },
     status:         { type: String, enum: ['pending', 'reviewed', 'accepted', 'rejected'], default: 'pending' },

@@ -1,139 +1,114 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, type Variants } from 'framer-motion';
+import { useState, useCallback, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Calendar, dateFnsLocalizer, type View, type EventProps } from 'react-big-calendar';
+import { format, parse, startOfWeek, getDay } from 'date-fns';
+import { enCA } from 'date-fns/locale';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-type ClassEntry = {
-  label: string;
-  icon: string;
-  category: string;
-  bg: string;
-  iconColor: string;
-  textColor: string;
-  borderColor: string;
-  shadowColor: string;
-  tagBg: string;
-  tagText: string;
-};
-type BreakRow = {
-  type: 'break';
-  label: string;
-  icon: string;
-  accent: string;
-};
-type ClassRow = {
-  type: 'class';
-  timeStart: string;
-  timeEnd: string;
-  classes: Record<string, ClassEntry | null>;
-};
-type ScheduleRow = ClassRow | BreakRow;
+const locales = { 'en-CA': enCA };
 
-const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek: () => startOfWeek(new Date(), { weekStartsOn: 0 }),
+  getDay,
+  locales,
+});
 
-// Medium: light pastel bg + solid accent border + colored shadow
-const P: Omit<ClassEntry, 'label' | 'icon'> = {
-  category: 'Tech',
-  bg: 'bg-[#f5e8ff]',
-  iconColor: 'text-[#8126cf]',
-  textColor: 'text-[#1a1a1a]',
-  borderColor: 'border-[#8126cf]',
-  shadowColor: 'rgba(129,38,207,0.35)',
-  tagBg: 'bg-[#8126cf]',
-  tagText: 'text-white',
-};
-const G: Omit<ClassEntry, 'label' | 'icon'> = {
-  category: 'Science',
-  bg: 'bg-[#e8f4ff]',
-  iconColor: 'text-[#1a84d2]',
-  textColor: 'text-[#1a1a1a]',
-  borderColor: 'border-[#1a84d2]',
-  shadowColor: 'rgba(0,106,45,0.35)',
-  tagBg: 'bg-[#1a84d2]',
-  tagText: 'text-white',
-};
-const A: Omit<ClassEntry, 'label' | 'icon'> = {
-  category: 'Creative',
-  bg: 'bg-[#fffbe8]',
-  iconColor: 'text-[#6a5b00]',
-  textColor: 'text-[#1a1a1a]',
-  borderColor: 'border-[#d4a800]',
-  shadowColor: 'rgba(212,168,0,0.45)',
-  tagBg: 'bg-[#fcdf46]',
-  tagText: 'text-[#483d00]',
+type EventCategory = 'academic' | 'holiday' | 'exam' | 'event' | 'break';
+
+interface CalendarEvent {
+  id: number;
+  title: string;
+  start: Date;
+  end: Date;
+  category: EventCategory;
+  allDay?: boolean;
+  desc?: string;
+}
+
+
+const categoryConfig: Record<EventCategory, { bg: string; border: string; text: string; label: string; tagBg: string; tagText: string }> = {
+  academic: { bg: '#1a84d2', border: '#003459', text: '#fff', label: 'Academic',  tagBg: 'bg-[#e8f4ff]', tagText: 'text-[#1a84d2]' },
+  exam:     { bg: '#8126cf', border: '#3d006e', text: '#fff', label: 'Exam',      tagBg: 'bg-[#f5e8ff]', tagText: 'text-[#8126cf]' },
+  holiday:  { bg: '#b02500', border: '#520c00', text: '#fff', label: 'Holiday',   tagBg: 'bg-[#fff0ec]', tagText: 'text-[#b02500]' },
+  break:    { bg: '#6a5b00', border: '#3b3200', text: '#fff', label: 'Break',     tagBg: 'bg-[#fffbe8]', tagText: 'text-[#6a5b00]' },
+  event:    { bg: '#1d7c5e', border: '#0a3728', text: '#fff', label: 'Event',     tagBg: 'bg-[#e4fff6]', tagText: 'text-[#1d7c5e]' },
 };
 
-const schedule: ScheduleRow[] = [
-  {
-    type: 'class',
-    timeStart: '09:00',
-    timeEnd:   '10:30',
-    classes: {
-      Monday:    { label: 'Advanced Robotics', icon: 'precision_manufacturing', ...P },
-      Tuesday:   { label: 'Creative Coding',   icon: 'code',                    ...P },
-      Wednesday: { label: 'Art & Design',       icon: 'palette',                 ...A },
-      Thursday:  { label: 'Science Lab',        icon: 'science',                 ...G },
-      Friday:    { label: 'Ethics in AI',       icon: 'psychology',              ...G },
-    },
-  },
-  {
-    type: 'break',
-    label: 'Short Break — 10:30 to 11:00',
-    icon: 'free_breakfast',
-    accent: '#6bb1ff',
-  },
-  {
-    type: 'class',
-    timeStart: '11:00',
-    timeEnd:   '12:30',
-    classes: {
-      Monday:    { label: 'Graphic Design',  icon: 'draw',              ...A },
-      Tuesday:   { label: 'Math Olympiad',   icon: 'calculate',         ...G },
-      Wednesday: { label: '3D Sculpting',    icon: 'view_in_ar',        ...A },
-      Thursday:  { label: 'Debate Club',     icon: 'record_voice_over', ...G },
-      Friday:    { label: 'Global Politics', icon: 'public',            ...G },
-    },
-  },
-  {
-    type: 'break',
-    label: 'Lunch Break — 12:30 to 14:00',
-    icon: 'restaurant',
-    accent: '#fcdf46',
-  },
-  {
-    type: 'class',
-    timeStart: '14:00',
-    timeEnd:   '15:30',
-    classes: {
-      Monday:    { label: 'Physics Lab', icon: 'bolt',          ...G },
-      Tuesday:   { label: 'VR Explore',  icon: 'vrpano',        ...P },
-      Wednesday: { label: 'Robotics',    icon: 'smart_toy',     ...P },
-      Thursday:  { label: 'App Dev',     icon: 'phone_android', ...P },
-      Friday:    null,
-    },
-  },
-];
+const Legend = () => (
+  <div className="flex flex-wrap gap-3">
+    {Object.entries(categoryConfig).map(([key, val]) => (
+      <div key={key} className={`flex items-center gap-2 ${val.tagBg} border-2 border-black px-3 py-1.5 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]`}>
+        <span className="w-3 h-3 rounded-full border-2 border-black flex-shrink-0" style={{ backgroundColor: val.bg }} />
+        <span className={`font-black text-xs uppercase tracking-wide ${val.tagText}`} style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+          {val.label}
+        </span>
+      </div>
+    ))}
+  </div>
+);
 
-// Always-visible bold day header colors
-const dayHeaderColors: Record<string, { bg: string; text: string; activeShadow: string }> = {
-  Monday:    { bg: '#6bb1ff', text: '#003459', activeShadow: '0 0 0 4px #003459 inset' },
-  Tuesday:   { bg: '#e5c6ff', text: '#4f0089', activeShadow: '0 0 0 4px #4f0089 inset' },
-  Wednesday: { bg: '#fcdf46', text: '#483d00', activeShadow: '0 0 0 4px #483d00 inset' },
-  Thursday:  { bg: '#6bb1ff', text: '#003459', activeShadow: '0 0 0 4px #003459 inset' },
-  Friday:    { bg: '#e5c6ff', text: '#4f0089', activeShadow: '0 0 0 4px #4f0089 inset' },
-};
-
-const stagger: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
-};
-const rowIn: Variants = {
-  hidden:  { opacity: 0, y: 22 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.42, ease: 'easeOut' } },
+const EventComponent = ({ event }: EventProps<CalendarEvent>) => {
+  const config = categoryConfig[event.category];
+  return (
+    <div
+      className="truncate px-1.5 py-0.5 text-[11px] font-black rounded leading-tight"
+      style={{
+        backgroundColor: config.bg,
+        color: config.text,
+        border: `2px solid ${config.border}`,
+        fontFamily: 'var(--font-space-grotesk)',
+      }}
+      title={event.desc || event.title}
+    >
+      {event.title}
+    </div>
+  );
 };
 
 export default function Schedule() {
-  const [activeDay, setActiveDay] = useState<string | null>(null);
+  const [view, setView] = useState<View>('month');
+  const [date, setDate] = useState(new Date());
+  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [eventsLoading, setEventsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/calendar')
+      .then((r) => r.json())
+      .then((data: Array<{ _id: string; title: string; start: string; end: string; category: EventCategory; allDay: boolean; desc?: string }>) => {
+        if (Array.isArray(data)) {
+          setEvents(
+            data.map((e, i) => ({
+              id: i,
+              title: e.title,
+              start: new Date(e.start),
+              end: new Date(e.end),
+              category: e.category,
+              allDay: e.allDay,
+              desc: e.desc,
+            }))
+          );
+        }
+      })
+      .catch(() => {})
+      .finally(() => setEventsLoading(false));
+  }, []);
+
+  const handleSelectEvent = useCallback((event: object) => {
+    setSelectedEvent(event as CalendarEvent);
+  }, []);
+
+  const handleNavigate = useCallback((newDate: Date) => {
+    setDate(newDate);
+  }, []);
+
+  const handleViewChange = useCallback((newView: View) => {
+    setView(newView);
+  }, []);
 
   return (
     <section
@@ -155,7 +130,7 @@ export default function Schedule() {
               className="inline-block bg-[#6bb1ff] border-2 border-black px-4 py-1 font-black text-xs uppercase tracking-widest mb-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
-              Weekly Timetable
+              2024 – 2025
             </span>
             <h2
               className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none"
@@ -167,210 +142,145 @@ export default function Schedule() {
               className="text-base font-bold text-[#5b5b5b] mt-3"
               style={{ fontFamily: 'var(--font-manrope)' }}
             >
-              Tap a day column to highlight your classes
+              Stay up to date with important dates — exams, holidays, school events, and enrollment milestones.
             </p>
           </div>
+          <Legend />
+        </motion.div>
 
-          {/* Legend pills */}
-          <div className="flex flex-wrap gap-3 items-center">
-            {[
-              { bg: '#f5e8ff', border: '#c4b5fd', dot: '#8126cf', label: 'Tech & Digital' },
-              { bg: '#e8f4ff', border: '#86c8ef', dot: '#1a84d2', label: 'Science & Academic' },
-              { bg: '#fffbe8', border: '#fde68a', dot: '#6a5b00', label: 'Creative Arts' },
-            ].map((l) => (
-              <div
-                key={l.label}
-                className="flex items-center gap-2 rounded-full px-3 py-1.5 border-2"
-                style={{ backgroundColor: l.bg, borderColor: l.border }}
-              >
-                <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: l.dot }} />
-                <span
-                  className="font-black text-xs uppercase tracking-wide text-[#1a1a1a]"
-                  style={{ fontFamily: 'var(--font-space-grotesk)' }}
-                >
-                  {l.label}
-                </span>
-              </div>
-            ))}
+        {/* Calendar */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
+        >
+          <div className="bg-white border-4 border-black rounded-2xl shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div className="mm-calendar-wrapper p-4 md:p-6 min-h-[700px]">
+              {eventsLoading ? (
+                <div className="flex items-center justify-center h-[700px]">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-10 h-10 border-4 border-[#1a84d2] border-t-transparent rounded-full animate-spin" />
+                    <p className="font-black text-xs uppercase tracking-widest text-[#5b5b5b]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+                      Loading Calendar…
+                    </p>
+                  </div>
+                </div>
+              ) : (
+              <Calendar
+                localizer={localizer}
+                events={events}
+                startAccessor="start"
+                endAccessor="end"
+                style={{ height: 700 }}
+                view={view}
+                date={date}
+                onNavigate={handleNavigate}
+                onView={handleViewChange}
+                onSelectEvent={handleSelectEvent}
+                components={{ event: EventComponent }}
+                eventPropGetter={(event) => {
+                  const e = event as CalendarEvent;
+                  const config = categoryConfig[e.category];
+                  return {
+                    style: {
+                      backgroundColor: config.bg,
+                      border: `2px solid ${config.border}`,
+                      color: config.text,
+                      borderRadius: '6px',
+                      fontFamily: 'var(--font-space-grotesk)',
+                      fontWeight: 900,
+                      fontSize: '11px',
+                    },
+                  };
+                }}
+                popup
+              />
+              )}
+            </div>
           </div>
         </motion.div>
 
-        {/* Table */}
-        <div className="border-4 border-black rounded-2xl overflow-hidden shadow-[10px_10px_0px_0px_rgba(0,0,0,1)]">
+      </div>
 
-          {/* Day headers — always colored, clickable */}
-          <div
-            className="grid border-b-4 border-black"
-            style={{ gridTemplateColumns: '110px repeat(5, 1fr)' }}
+      {/* Event Detail Modal */}
+      {selectedEvent && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedEvent(null)}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white border-4 border-black rounded-2xl shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] max-w-md w-full p-8 relative"
           >
-            {/* Corner cell */}
-            <div className="bg-black flex items-center justify-center border-r-4 border-black p-3">
+            <div
+              className="absolute top-0 left-0 right-0 h-2 rounded-t-xl"
+              style={{ backgroundColor: categoryConfig[selectedEvent.category].bg }}
+            />
+
+            <div className="flex items-start justify-between gap-4 mt-2 mb-4">
               <span
-                className="material-symbols-outlined text-[#6bb1ff] text-2xl"
-                style={{ fontVariationSettings: "'FILL' 1" }}
+                className={`${categoryConfig[selectedEvent.category].tagBg} ${categoryConfig[selectedEvent.category].tagText} border-2 border-black font-black text-xs uppercase tracking-wide px-3 py-1 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]`}
+                style={{ fontFamily: 'var(--font-space-grotesk)' }}
               >
-                calendar_month
+                {categoryConfig[selectedEvent.category].label}
               </span>
+              <button
+                onClick={() => setSelectedEvent(null)}
+                className="w-8 h-8 border-2 border-black rounded-lg flex items-center justify-center hover:bg-gray-100 transition-colors flex-shrink-0"
+              >
+                <span className="material-symbols-outlined text-base">close</span>
+              </button>
             </div>
 
-            {days.map((day) => {
-              const c = dayHeaderColors[day];
-              const isActive = activeDay === day;
-              return (
-                <button
-                  key={day}
-                  onClick={() => setActiveDay(isActive ? null : day)}
-                  className="p-4 text-center border-r-4 last:border-r-0 border-black transition-all duration-200 cursor-pointer"
-                  style={{
-                    backgroundColor: c.bg,
-                    boxShadow: isActive ? c.activeShadow : 'none',
-                  }}
-                >
-                  <p
-                    className="font-black text-lg md:text-xl uppercase leading-none"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: c.text }}
-                  >
-                    {day.slice(0, 3)}
+            <h3
+              className="text-2xl font-black text-[#1a1a1a] leading-tight mb-2"
+              style={{ fontFamily: 'var(--font-space-grotesk)' }}
+            >
+              {selectedEvent.title}
+            </h3>
+
+            {selectedEvent.desc && (
+              <p className="font-bold text-sm text-[#5b5b5b] mb-5" style={{ fontFamily: 'var(--font-manrope)' }}>
+                {selectedEvent.desc}
+              </p>
+            )}
+
+            <div className="flex flex-col gap-2.5">
+              <div className="flex items-center gap-3 border-2 border-[#e2e2e2] rounded-xl p-3">
+                <span className="material-symbols-outlined text-base" style={{ color: categoryConfig[selectedEvent.category].bg, fontVariationSettings: "'FILL' 1" }}>
+                  calendar_today
+                </span>
+                <div>
+                  <p className="font-black text-[10px] uppercase tracking-wide text-[#5b5b5b]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>Start Date</p>
+                  <p className="font-bold text-sm text-[#1a1a1a]" style={{ fontFamily: 'var(--font-manrope)' }}>
+                    {format(selectedEvent.start, 'MMMM d, yyyy')}
                   </p>
-                  <p
-                    className="font-bold text-[10px] uppercase tracking-widest mt-0.5 hidden md:block opacity-70"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: c.text }}
-                  >
-                    {day}
-                  </p>
-                </button>
-              );
-            })}
-          </div>
+                </div>
+              </div>
 
-          {/* Rows */}
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-          >
-            {schedule.map((row, idx) => {
-
-              /* ── Break row ── */
-              if (row.type === 'break') {
-                return (
-                  <motion.div
-                    key={idx}
-                    variants={rowIn}
-                    className="bg-black border-b-4 border-black last:border-b-0 px-6 py-4 flex items-center gap-4"
-                  >
-                    <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 border-2 border-white/20"
-                      style={{ backgroundColor: row.accent + '22' }}
-                    >
-                      <span
-                        className="material-symbols-outlined text-lg"
-                        style={{ color: row.accent, fontVariationSettings: "'FILL' 1" }}
-                      >
-                        {row.icon}
-                      </span>
-                    </div>
-                    <span
-                      className="font-black text-sm uppercase tracking-widest"
-                      style={{ fontFamily: 'var(--font-space-grotesk)', color: row.accent }}
-                    >
-                      {row.label}
-                    </span>
-                  </motion.div>
-                );
-              }
-
-              /* ── Class row ── */
-              return (
-                <motion.div
-                  key={idx}
-                  variants={rowIn}
-                  className="grid border-b-4 last:border-b-0 border-black"
-                  style={{ gridTemplateColumns: '110px repeat(5, 1fr)' }}
-                >
-                  {/* Time cell */}
-                  <div className="bg-black border-r-4 border-black flex flex-col items-center justify-center gap-0.5 py-4 px-2">
-                    <span
-                      className="font-black text-sm text-[#6bb1ff] leading-none"
-                      style={{ fontFamily: 'var(--font-space-grotesk)' }}
-                    >
-                      {row.timeStart}
-                    </span>
-                    <span className="text-white/30 text-xs font-bold">—</span>
-                    <span
-                      className="font-black text-sm text-[#6bb1ff] leading-none"
-                      style={{ fontFamily: 'var(--font-space-grotesk)' }}
-                    >
-                      {row.timeEnd}
-                    </span>
+              {selectedEvent.start.getTime() !== selectedEvent.end.getTime() && (
+                <div className="flex items-center gap-3 border-2 border-[#e2e2e2] rounded-xl p-3">
+                  <span className="material-symbols-outlined text-base" style={{ color: categoryConfig[selectedEvent.category].bg, fontVariationSettings: "'FILL' 1" }}>
+                    event
+                  </span>
+                  <div>
+                    <p className="font-black text-[10px] uppercase tracking-wide text-[#5b5b5b]" style={{ fontFamily: 'var(--font-space-grotesk)' }}>End Date</p>
+                    <p className="font-bold text-sm text-[#1a1a1a]" style={{ fontFamily: 'var(--font-manrope)' }}>
+                      {format(selectedEvent.end, 'MMMM d, yyyy')}
+                    </p>
                   </div>
-
-                  {/* Class cells */}
-                  {days.map((day) => {
-                    const cell = row.classes[day];
-                    const isDimmed = activeDay && activeDay !== day;
-                    return (
-                      <div
-                        key={day}
-                        className={`p-2.5 border-r-4 last:border-r-0 border-black transition-opacity duration-300 ${isDimmed ? 'opacity-15' : 'opacity-100'}`}
-                      >
-                        {cell ? (
-                          <motion.div
-                            whileHover={{ scale: 1.04, y: -3, transition: { duration: 0.18 } }}
-                            whileTap={{ scale: 0.97 }}
-                            className={`${cell.bg} border-2 ${cell.borderColor} rounded-xl p-3 h-full cursor-pointer flex flex-col gap-2`}
-                            style={{ boxShadow: `4px 4px 0px 0px ${cell.shadowColor}` }}
-                          >
-                            {/* Top row: icon + category tag */}
-                            <div className="flex items-start justify-between gap-1">
-                              <span
-                                className={`material-symbols-outlined text-3xl ${cell.iconColor}`}
-                                style={{ fontVariationSettings: "'FILL' 1" }}
-                              >
-                                {cell.icon}
-                              </span>
-                              <span
-                                className={`${cell.tagBg} ${cell.tagText} font-black text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded-md leading-none whitespace-nowrap`}
-                                style={{ fontFamily: 'var(--font-space-grotesk)' }}
-                              >
-                                {cell.category}
-                              </span>
-                            </div>
-                            {/* Label */}
-                            <p
-                              className={`font-black text-xs leading-snug ${cell.textColor}`}
-                              style={{ fontFamily: 'var(--font-space-grotesk)' }}
-                            >
-                              {cell.label}
-                            </p>
-                          </motion.div>
-                        ) : (
-                          <div
-                            className="rounded-xl h-full min-h-[90px] flex items-center justify-center"
-                            style={{
-                              background: 'repeating-linear-gradient(45deg, #f1f1f1, #f1f1f1 4px, #ffffff 4px, #ffffff 12px)',
-                              border: '2px dashed #e2e2e2',
-                            }}
-                          >
-                            <p
-                              className="font-black text-xs text-[#c0c0c0] uppercase tracking-widest"
-                              style={{ fontFamily: 'var(--font-space-grotesk)' }}
-                            >
-                              Off
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </motion.div>
-              );
-            })}
+                </div>
+              )}
+            </div>
           </motion.div>
-        </div>
-
-      </div>
+        </motion.div>
+      )}
     </section>
   );
 }

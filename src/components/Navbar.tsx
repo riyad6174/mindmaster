@@ -7,11 +7,11 @@ import { usePathname } from 'next/navigation';
 import logo from '../assets/logo.png';
 
 const navLinks = [
-  { label: 'Home',              href: '/' },
-  { label: 'Programs',          href: '/programs' },
-  { label: 'Academic Calendar', href: '/academic-calendar' },
-  { label: 'About',             href: '/about' },
-  { label: 'Contact',           href: '/contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Programs', href: '/programs' },
+  // { label: 'Academic Calendar', href: '/academic-calendar' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -43,9 +43,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`font-black tracking-tight py-1 transition-all hover:translate-x-[2px] hover:translate-y-[2px] relative ${
-                active
-                  ? 'text-[#1a84d2]'
-                  : 'text-black hover:text-[#8126cf]'
+                active ? 'text-[#1a84d2]' : 'text-black hover:text-[#8126cf]'
               }`}
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >
@@ -125,7 +123,9 @@ export default function Navbar() {
               href='/apply'
               onClick={() => setMenuOpen(false)}
               className={`brutalist-button inline-block font-black px-6 py-3 border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
-                isActive('/apply') ? 'bg-black text-[#6bb1ff]' : 'bg-[#6bb1ff] text-black'
+                isActive('/apply')
+                  ? 'bg-black text-[#6bb1ff]'
+                  : 'bg-[#6bb1ff] text-black'
               }`}
               style={{ fontFamily: 'var(--font-space-grotesk)' }}
             >

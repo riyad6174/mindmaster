@@ -16,7 +16,7 @@ interface EnrollmentSubmission {
   email: string;
   address: string;
   program: string;
-  supportArea: string;
+  supportArea: string[];
   learningFormat: string;
   enrollDate: string;
   status: string;
@@ -64,7 +64,7 @@ export default function AdminEnrollmentsPage() {
         ['Email', e.email],
         ['Address', e.address],
         ['Chosen Program', e.program],
-        ['Area of Support', e.supportArea || 'N/A'],
+        ['Area of Support', e.supportArea?.length ? e.supportArea.join(', ') : 'N/A'],
         ['Learning Format', e.learningFormat || 'N/A'],
         ['Preferred Start Date', e.enrollDate],
         ['Submission Date', format(new Date(e.createdAt), 'MMMM d, yyyy')],
@@ -248,7 +248,20 @@ export default function AdminEnrollmentsPage() {
                   <div>
                     <label className="block text-[10px] uppercase font-black tracking-widest text-slate-400 mb-1">Preferences</label>
                     <p className="text-xs font-bold text-slate-700">Format: <span className="text-slate-500">{selected.learningFormat || 'N/A'}</span></p>
-                    <p className="text-xs font-bold text-slate-700">Support: <span className="text-slate-500">{selected.supportArea || 'N/A'}</span></p>
+                    <div className="flex flex-col gap-1">
+                      <p className="text-xs font-bold text-slate-700">Support Areas:</p>
+                      {selected.supportArea?.length ? (
+                        <div className="flex flex-wrap gap-1 mt-0.5">
+                          {selected.supportArea.map((area) => (
+                            <span key={area} className="text-[10px] font-bold px-2 py-0.5 bg-[#e8f4ff] border border-[#86c8ef] text-[#1a84d2] rounded">
+                              {area}
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <span className="text-xs text-slate-500">N/A</span>
+                      )}
+                    </div>
                     <p className="text-xs font-bold text-slate-700">Start: <span className="text-slate-500">{selected.enrollDate}</span></p>
                   </div>
                 </div>
