@@ -3,11 +3,12 @@ import { connectDB } from '@/lib/mongoose';
 import { CalendarEvent } from '@/models/CalendarEvent';
 import { getAdminFromCookie } from '@/lib/auth';
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const admin = await getAdminFromCookie();
     if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
+    const { id } = await params;
     const body = await req.json();
     const { title, start, end, category, allDay, desc } = body;
 
@@ -17,7 +18,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
     await connectDB();
     const event = await CalendarEvent.findByIdAndUpdate(
-      params.id,
+      id,
       { title, start, end, category, allDay: !!allDay, desc },
       { new: true }
     );
@@ -30,13 +31,14 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(_req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const admin = await getAdminFromCookie();
     if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
+    const { id } = await params;
     await connectDB();
-    const event = await CalendarEvent.findByIdAndDelete(params.id);
+    const event = await CalendarEvent.findByIdAndDelete(id);
     if (!event) return NextResponse.json({ error: 'Event not found' }, { status: 404 });
 
     return NextResponse.json({ success: true });
